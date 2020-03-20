@@ -1,0 +1,422 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.checkinsystem.activities.LoginActivity">
+
+    <FrameLayout
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:paddingTop="70dp">
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/cv_add"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            app:cardBackgroundColor="@color/colorPrimary"
+            app:cardCornerRadius="6dp"
+            app:cardElevation="3dp"
+            app:cardUseCompatPadding="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingStart="25dp"
+                android:paddingEnd="16dp">
+
+                <TextView
+                    android:id="@+id/tv_register_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="35dp"
+                    android:text="注册"
+                    android:textColor="@color/colorTextOnPrimary"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp">
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColorHint="@color/colorTextOnPrimary"
+                        android:theme="@style/TextLabel_Secondary">
+
+                        <EditText
+                            android:id="@+id/et_username"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/selector_bg_edit_2"
+                            android:hint="请输入邮箱"
+                            android:inputType="textPersonName"
+                            android:paddingBottom="2dp"
+                            android:textColor="@color/colorTextOnPrimary"
+                            android:textCursorDrawable="@drawable/bg_input_cursor_2"
+                            android:textSize="16sp" />
+                    </android.support.design.widget.TextInputLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="4"
+                        android:textColorHint="@color/colorTextOnPrimary"
+                        android:theme="@style/TextLabel_Secondary">
+
+                        <EditText
+                            android:id="@+id/et_verify_code"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/selector_bg_edit_2"
+                            android:hint="验证码"
+                            android:inputType="number"
+                            android:paddingBottom="2dp"
+                            android:textColor="@color/colorTextOnPrimary"
+                            android:textCursorDrawable="@drawable/bg_input_cursor_2"
+                            android:textSize="16sp"
+                            />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="6"
+                        android:gravity="end">
+
+                        <Button
+                            android:id="@+id/send_verify_code"
+                            android:layout_width="wrap_content"
+                            android:layout_height="40dp"
+                            android:text="发送验证码"
+                            android:textColor="@color/colorPrimary"
+                            android:backgroundTint="@color/white"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColorHint="@color/colorTextOnPrimary"
+                        android:theme="@style/TextLabel_Secondary">
+
+                        <EditText
+                            android:id="@+id/et_password"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/selector_bg_edit_2"
+                            android:hint="请输入密码"
+                            android:inputType="textPassword"
+                            android:paddingBottom="2dp"
+                            android:textColor="@color/colorTextOnPrimary"
+                            android:textCursorDrawable="@drawable/bg_input_cursor_2"
+                            android:textSize="16sp" />
+                    </android.support.design.widget.TextInputLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <android.support.design.widget.TextInputLayout
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColorHint="@color/colorTextOnPrimary"
+                        android:theme="@style/TextLabel_Secondary">
+
+                        <EditText
+                            android:id="@+id/et_repeatpassword"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/selector_bg_edit_2"
+                            android:hint="请确认密码"
+                            android:inputType="textPassword"
+                            android:paddingBottom="2dp"
+                            android:textColor="@color/colorTextOnPrimary"
+                            android:textCursorDrawable="@drawable/bg_input_cursor_2"
+                            android:textSize="16sp" />
+                    </android.support.design.widget.TextInputLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="5"
+                        android:layout_height="wrap_content"
+                        android:textColorHint="@color/colorTextOnPrimary"
+                        android:theme="@style/TextLabel_Secondary"
+                        android:layout_marginEnd="8dp">
+
+                        <EditText
+                            android:id="@+id/user_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/selector_bg_edit_2"
+                            android:hint="姓名"
+                            android:inputType="textPersonName"
+                            android:paddingBottom="2dp"
+                            android:textColor="@color/colorTextOnPrimary"
+                            android:textCursorDrawable="@drawable/bg_input_cursor_2"
+                            android:textSize="16sp" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="5"
+                        android:layout_height="wrap_content"
+                        android:textColorHint="@color/colorTextOnPrimary"
+                        android:theme="@style/TextLabel_Secondary"
+                        android:layout_marginStart="8dp">
+
+                        <EditText
+                            android:id="@+id/et_user_code"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/selector_bg_edit_2"
+                            android:hint="学号/工号"
+                            android:inputType="text"
+                            android:paddingBottom="2dp"
+                            android:textColor="@color/colorTextOnPrimary"
+                            android:textCursorDrawable="@drawable/bg_input_cursor_2"
+                            android:textSize="16sp" />
+                    </android.support.design.widget.TextInputLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColorHint="@color/colorTextOnPrimary"
+                        android:theme="@style/TextLabel_Secondary">
+
+                        <EditText
+                            android:id="@+id/et_phone"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/selector_bg_edit_2"
+                            android:hint="手机号"
+                            android:inputType="phone"
+                            android:paddingBottom="2dp"
+                            android:textColor="@color/colorTextOnPrimary"
+                            android:textCursorDrawable="@drawable/bg_input_cursor_2"
+                            android:textSize="16sp" />
+                    </android.support.design.widget.TextInputLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_stu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp">
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="3"
+                        android:layout_height="wrap_content"
+                        android:textColorHint="@color/colorTextOnPrimary"
+                        android:theme="@style/TextLabel_Secondary"
+                        android:layout_marginEnd="4dp">
+
+                        <android.support.v7.widget.AppCompatAutoCompleteTextView
+                            android:id="@+id/act_user_school"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/selector_bg_edit_2"
+                            android:hint="学校"
+                            android:inputType="text"
+                            android:paddingBottom="2dp"
+                            android:textColor="@color/colorTextOnPrimary"
+                            android:textCursorDrawable="@drawable/bg_input_cursor_2"
+                            android:textSize="16sp" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="3"
+                        android:layout_height="wrap_content"
+                        android:textColorHint="@color/colorTextOnPrimary"
+                        android:theme="@style/TextLabel_Secondary"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginEnd="4dp">
+
+                        <android.support.v7.widget.AppCompatAutoCompleteTextView
+                            android:id="@+id/act_user_department"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/selector_bg_edit_2"
+                            android:hint="学院"
+                            android:inputType="text"
+                            android:paddingBottom="2dp"
+                            android:textColor="@color/colorTextOnPrimary"
+                            android:textCursorDrawable="@drawable/bg_input_cursor_2"
+                            android:textSize="16sp" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="3"
+                        android:layout_height="wrap_content"
+                        android:textColorHint="@color/colorTextOnPrimary"
+                        android:theme="@style/TextLabel_Secondary"
+                        android:layout_marginStart="4dp">
+
+                        <android.support.v7.widget.AppCompatAutoCompleteTextView
+                            android:id="@+id/act_user_profession"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/selector_bg_edit_2"
+                            android:hint="专业"
+                            android:inputType="textPersonName"
+                            android:paddingBottom="2dp"
+                            android:textColor="@color/colorTextOnPrimary"
+                            android:textCursorDrawable="@drawable/bg_input_cursor_2"
+                            android:textSize="16sp" />
+                    </android.support.design.widget.TextInputLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_teacher"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp">
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="3"
+                        android:layout_height="wrap_content"
+                        android:textColorHint="@color/colorTextOnPrimary"
+                        android:theme="@style/TextLabel_Secondary"
+                        android:layout_marginEnd="4dp">
+
+                        <EditText
+                            android:id="@+id/et_user_school"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/selector_bg_edit_2"
+                            android:hint="学校/单位"
+                            android:inputType="text"
+                            android:paddingBottom="2dp"
+                            android:textColor="@color/colorTextOnPrimary"
+                            android:textCursorDrawable="@drawable/bg_input_cursor_2"
+                            android:textSize="16sp" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="3"
+                        android:layout_height="wrap_content"
+                        android:textColorHint="@color/colorTextOnPrimary"
+                        android:theme="@style/TextLabel_Secondary"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginEnd="4dp">
+
+                        <EditText
+                            android:id="@+id/et_user_department"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/selector_bg_edit_2"
+                            android:hint="学院/部门"
+                            android:inputType="text"
+                            android:paddingBottom="2dp"
+                            android:textColor="@color/colorTextOnPrimary"
+                            android:textCursorDrawable="@drawable/bg_input_cursor_2"
+                            android:textSize="16sp" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="3"
+                        android:layout_height="wrap_content"
+                        android:textColorHint="@color/colorTextOnPrimary"
+                        android:theme="@style/TextLabel_Secondary"
+                        android:layout_marginStart="4dp">
+
+                        <EditText
+                            android:id="@+id/et_user_profession"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/selector_bg_edit_2"
+                            android:hint="专业/职位"
+                            android:inputType="textPersonName"
+                            android:paddingBottom="2dp"
+                            android:textColor="@color/colorTextOnPrimary"
+                            android:textCursorDrawable="@drawable/bg_input_cursor_2"
+                            android:textSize="16sp" />
+                    </android.support.design.widget.TextInputLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_horizontal"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp">
+
+                    <Button
+                        android:id="@+id/bt_go"
+                        android:layout_width="100dp"
+                        android:layout_height="40dp"
+                        android:background="@drawable/bt_shape_2"
+                        android:stateListAnimator="@drawable/state_list_animator_z"
+                        android:text="注册"
+                        android:textColor="@color/colorPrimary"
+                        android:layout_marginEnd="8dp"/>
+
+                    <Button
+                        android:id="@+id/bt_switch_type"
+                        android:layout_width="100dp"
+                        android:layout_height="40dp"
+                        android:background="@drawable/bt_shape_2"
+                        android:text="切换注册类型"
+                        android:textColor="@color/colorPrimary"
+                        android:layout_marginStart="8dp"/>
+
+                </LinearLayout>
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|top"
+            android:src="@drawable/ic_clear_white_24dp"
+            android:transitionName="loginFab"
+            app:fabSize="normal" />
+    </FrameLayout>
+
+
+</RelativeLayout>

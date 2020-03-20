@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="@color/colorPrimary"
+        android:minHeight="?actionBarSize"
+        app:navigationIcon="@drawable/ic_arrow_back_white_36dp"
+        app:title="创建课程"
+        app:titleTextColor="@color/white" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:divider="@drawable/divider_transparent"
+        android:dividerPadding="4dp"
+        android:orientation="vertical"
+        android:paddingStart="50dp"
+        android:paddingEnd="30dp"
+        android:showDividers="middle">
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="@color/colorPrimary"
+            android:theme="@style/TextLabel_Primary">
+
+            <EditText
+                android:id="@+id/course_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/selector_bg_edit"
+                android:hint="课程名称"
+                android:inputType="text"
+                android:paddingBottom="2dp"
+                android:textColor="@color/colorPrimary"
+                android:textCursorDrawable="@drawable/bg_input_cursor"
+                android:textSize="@dimen/input_text_size" />
+        </android.support.design.widget.TextInputLayout>
+
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="@color/colorPrimary"
+            android:theme="@style/TextLabel_Primary">
+
+            <EditText
+                android:id="@+id/location_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/selector_bg_edit"
+                android:hint="上课地点"
+                android:inputType="text"
+                android:paddingBottom="2dp"
+                android:textColor="@color/colorPrimary"
+                android:textCursorDrawable="@drawable/bg_input_cursor"
+                android:textSize="@dimen/input_text_size" />
+        </android.support.design.widget.TextInputLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="上课时间格式：xx:xx-xx:xx"
+            android:textColor="@color/colorSecondary" />
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="@color/colorPrimary"
+            android:theme="@style/TextLabel_Primary">
+
+            <EditText
+                android:id="@+id/course_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/selector_bg_edit"
+                android:hint="上课时间"
+                android:inputType="text"
+                android:paddingBottom="2dp"
+                android:textColor="@color/colorPrimary"
+                android:textCursorDrawable="@drawable/bg_input_cursor"
+                android:textSize="@dimen/input_text_size" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="@color/colorPrimary"
+            android:theme="@style/TextLabel_Primary">
+
+            <EditText
+                android:id="@+id/course_count"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/selector_bg_edit"
+                android:hint="上课人数"
+                android:inputType="text"
+                android:paddingBottom="2dp"
+                android:textColor="@color/colorPrimary"
+                android:textCursorDrawable="@drawable/bg_input_cursor"
+                android:textSize="@dimen/input_text_size" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="@color/colorPrimary"
+            android:theme="@style/TextLabel_Primary">
+
+            <EditText
+                android:id="@+id/course_teacher"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/selector_bg_edit"
+                android:hint="任课教师"
+                android:inputType="text"
+                android:paddingBottom="2dp"
+                android:textColor="@color/colorPrimary"
+                android:textCursorDrawable="@drawable/bg_input_cursor"
+                android:textSize="@dimen/input_text_size" />
+        </android.support.design.widget.TextInputLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="ps:请在上课地点创建课程，否则定位不准"
+            android:textColor="@color/colorSecondary" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/loading_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/bt_shape"
+        android:text="提交"
+        android:textColor="@color/colorPrimary"
+        android:textSize="18sp" />
+
+
+</LinearLayout>

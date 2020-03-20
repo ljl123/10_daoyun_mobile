@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">到云</string>
+    <string name="title_course">我的课程</string>
+    <string name="title_add">添加课程</string>
+    <string name="title_my">我的</string>
+    <string name="login_login">登录</string>
+    <string name="login_username">手机号/邮箱</string>
+    <string name="login_password">密码</string>
+    <string name="login_login_bt">登录</string>
+    <string name="login_register_bt">注册</string>
+    <string name="login_forget_password">忘记密码</string>
+    <string name="http_get_school_info">学校信息</string>
+
+</resources>
