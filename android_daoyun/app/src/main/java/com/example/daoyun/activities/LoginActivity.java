@@ -157,10 +157,10 @@ public class LoginActivity extends AppCompatActivity {
 
     @OnClick(R.id.register_go)
     public void onFabClicked() {
-        getWindow().setExitTransition(null);
-        getWindow().setEnterTransition(null);
-        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(LoginActivity.this, fab, fab.getTransitionName());
-        startActivity(new Intent(LoginActivity.this, RegisterActivity.class), options.toBundle());
+//        getWindow().setExitTransition(null);
+//        getWindow().setEnterTransition(null);
+//        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(LoginActivity.this, fab, fab.getTransitionName());
+        startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
     }
 
     private void loginSuccess() {

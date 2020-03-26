@@ -68,15 +68,16 @@ public class RegisterActivity extends AppCompatActivity {
     private static final int WHAT_HIDE_LOADING = 1007;
     //注册成功 返回
     private static final int WHAT_BACK = 1008;
-
-    @BindView(R.id.et_username)
+    @BindView(R.id.regist_back)
+    Button registBack;
+    @BindView(R.id.et_phone)
     EditText etUsername;
     @BindView(R.id.et_verify_code)
     EditText etVerifyCode;
     @BindView(R.id.send_verify_code)
     Button sendVerifyCode;
-    @BindView(R.id.et_phone)
-    EditText etPhone;
+    @BindView(R.id.et_email)
+    EditText et_email;
     @BindView(R.id.et_password)
     EditText etPassword;
     @BindView(R.id.et_repeatpassword)
@@ -93,14 +94,8 @@ public class RegisterActivity extends AppCompatActivity {
     EditText etUserProfession;
     @BindView(R.id.bt_go)
     Button btGo;
-    @BindView(R.id.cv_add)
-    CardView cvAdd;
-    @BindView(R.id.fab)
-    FloatingActionButton fab;
     @BindView(R.id.bt_switch_type)
     Button btSwitchType;
-    @BindView(R.id.tv_register_title)
-    TextView tvRegisterTitle;
     @BindView(R.id.ll_stu)
     LinearLayout llStu;
     @BindView(R.id.ll_teacher)
@@ -131,7 +126,6 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         ButterKnife.bind(this);
-        ShowEnterAnimation();
         initData();
         initView();
         DialogSettings.style = DialogSettings.STYLE_MATERIAL;
@@ -168,16 +162,14 @@ public class RegisterActivity extends AppCompatActivity {
     @SuppressLint("ClickableViewAccessibility")
     private void initView() {
         switchType();
-        fab.setOnClickListener(v -> animateRevealClose());
         actUserSchool.setOnTouchListener(this::onActUserSchoolTouched);
         actUserDepartment.setOnTouchListener(this::onActUserDepartmentTouched);
         actUserProfession.setOnTouchListener(this::onActUserProfessionTouched);
         setEditTextListener();
     }
-
-    @Override
-    public void onBackPressed() {
-        animateRevealClose();
+    @OnClick(R.id.regist_back)
+    public void onRegistBackClicked() {
+        onBackPressed();
     }
 
     @OnClick(R.id.send_verify_code)
@@ -217,9 +209,9 @@ public class RegisterActivity extends AppCompatActivity {
         if (checkInput()) {
             WaitDialog.show(RegisterActivity.this, "注册中...");
             Map<String, String> p = new HashMap<>();
-            p.put("email", etUsername.getText().toString());
+            p.put("phone", etUsername.getText().toString());
             p.put("email_code", etVerifyCode.getText().toString());
-            p.put("phone", etPhone.getText().toString());
+            p.put("email", et_email.getText().toString());
             p.put("password", Util.md5(etPassword.getText().toString()));
             p.put("type", typeStateStu ? "3" : "2");
             p.put("name", userName.getText().toString());
@@ -254,7 +246,7 @@ public class RegisterActivity extends AppCompatActivity {
         if (etUsername.getError() != null) return false;
         if (etPassword.getError() != null) return false;
         if (etRepeatpassword.getError() != null) return false;
-        return etPhone.getError() == null;
+        return et_email.getError() == null;
     }
 
 
@@ -361,7 +353,6 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void switchType() {
         btSwitchType.setText(typeStateStu ? "注册教师版" : "注册学生版");
-        tvRegisterTitle.setText(typeStateStu ? "注册学生账号" : "注册教师账号");
         llStu.setVisibility(typeStateStu ? View.VISIBLE : View.GONE);
         llTeacher.setVisibility(typeStateStu ? View.GONE : View.VISIBLE);
     }
@@ -422,82 +413,6 @@ public class RegisterActivity extends AppCompatActivity {
             }
         }
     };
-
-    private void ShowEnterAnimation() {
-        Transition transition = TransitionInflater.from(this).inflateTransition(R.transition.fabtransition);
-        getWindow().setSharedElementEnterTransition(transition);
-
-        transition.addListener(new Transition.TransitionListener() {
-            @Override
-            public void onTransitionStart(Transition transition) {
-                cvAdd.setVisibility(View.GONE);
-            }
-
-            @Override
-            public void onTransitionEnd(Transition transition) {
-                transition.removeListener(this);
-                animateRevealShow();
-            }
-
-            @Override
-            public void onTransitionCancel(Transition transition) {
-
-            }
-
-            @Override
-            public void onTransitionPause(Transition transition) {
-
-            }
-
-            @Override
-            public void onTransitionResume(Transition transition) {
-
-            }
-
-
-        });
-    }
-
-    public void animateRevealShow() {
-        Animator mAnimator = ViewAnimationUtils.createCircularReveal(cvAdd, cvAdd.getWidth() / 2, 0, fab.getWidth() / 2, cvAdd.getHeight());
-        mAnimator.setDuration(500);
-        mAnimator.setInterpolator(new AccelerateInterpolator());
-        mAnimator.addListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                super.onAnimationEnd(animation);
-            }
-
-            @Override
-            public void onAnimationStart(Animator animation) {
-                cvAdd.setVisibility(View.VISIBLE);
-                super.onAnimationStart(animation);
-            }
-        });
-        mAnimator.start();
-    }
-
-    public void animateRevealClose() {
-        Animator mAnimator = ViewAnimationUtils.createCircularReveal(cvAdd, cvAdd.getWidth() / 2, 0, cvAdd.getHeight(), fab.getWidth() / 2);
-        mAnimator.setDuration(500);
-        mAnimator.setInterpolator(new AccelerateInterpolator());
-        mAnimator.addListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                cvAdd.setVisibility(View.INVISIBLE);
-                super.onAnimationEnd(animation);
-                fab.setImageResource(R.drawable.ic_add_white_24dp);
-                RegisterActivity.super.onBackPressed();
-            }
-
-            @Override
-            public void onAnimationStart(Animator animation) {
-                super.onAnimationStart(animation);
-            }
-        });
-        mAnimator.start();
-    }
-
     private void setEditTextListener() {
         etUsername.addTextChangedListener(new TextWatcher() {
             @Override
@@ -513,8 +428,8 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 if (!s.toString().equals("")) {
-                    if (!Pattern.matches(Util.Email_Reg, s.toString())) {
-                        etUsername.setError("邮箱格式不正确");
+                    if (!Pattern.matches(Util.Phone_Reg, s.toString())) {
+                        etUsername.setError("请输入正确的手机号");
                     } else {
                         etUsername.setError(null);
                     }
@@ -565,7 +480,7 @@ public class RegisterActivity extends AppCompatActivity {
                 }
             }
         });
-        etPhone.addTextChangedListener(new TextWatcher() {
+        et_email.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -579,10 +494,10 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 if (!s.toString().equals("")) {
-                    if (!Pattern.matches(Util.Phone_Reg, s.toString())) {
-                        etPhone.setError("请输入正确的手机号");
+                    if (!Pattern.matches(Util.Email_Reg, s.toString())) {
+                        et_email.setError("请输入正确的邮箱");
                     } else {
-                        etPhone.setError(null);
+                        et_email.setError(null);
                     }
                 }
             }

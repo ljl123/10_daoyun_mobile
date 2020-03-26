@@ -43,9 +43,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp">
                 <android.support.design.widget.TextInputLayout
-                    android:textColorHint="@color/dark"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:theme="@style/TextLabel_Primary">
                     <EditText
                         android:textSize="18sp"
                         android:hint="@string/login_username"
@@ -67,13 +67,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp">
                 <android.support.design.widget.TextInputLayout
-                    android:textColorHint="@color/dark"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:theme="@style/TextLabel_Primary">
                     <EditText
                         android:textSize="18sp"
                         android:hint="@string/login_password"
-                        android:textColor="@color/dark"
+                        android:textColor="@color/colorPrimary"
                         android:id="@+id/et_password"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -119,7 +119,7 @@
                     android:background="@drawable/bt_shape"
                     android:stateListAnimator="@drawable/state_list_animator_z"
                     android:text="@string/login_register_bt"
-                    android:textColor="@color/colorSecondaryDark"></Button>
+                    android:textColor="@color/colorPrimary"></Button>
             </RelativeLayout>
 
         </LinearLayout>
