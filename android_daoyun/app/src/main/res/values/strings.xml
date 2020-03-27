@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">到云</string>
-    <string name="title_course">我的课程</string>
-    <string name="title_add">添加课程</string>
+    <string name="title_course">班课</string>
+    <string name="title_add">添加/创建</string>
     <string name="title_my">我的</string>
     <string name="login_login">登录</string>
     <string name="login_username">手机号/邮箱</string>

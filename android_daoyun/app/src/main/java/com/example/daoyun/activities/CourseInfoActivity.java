@@ -135,11 +135,11 @@ public class CourseInfoActivity extends AppCompatActivity {
                             check.setVisibility(View.GONE);
                         } else if (userType.equals("2")) {
                             if (!canCheck) {
-                                check.setText("点名");
+                                check.setText("发起签到");
                                 check.setClickable(true);
                                 check.setVisibility(View.VISIBLE);
                             } else {
-                                check.setText("点名中");
+                                check.setText("签到中");
                                 check.setClickable(false);
                                 check.setVisibility(View.VISIBLE);
                             }
@@ -226,7 +226,7 @@ public class CourseInfoActivity extends AppCompatActivity {
     private void initView() {
         setButtonState();
         toolbar.setNavigationOnClickListener(v -> onBackPressed());
-        check.setText(userType.equals("3") ? "签到" : "点名");
+        check.setText(userType.equals("3") ? "签到" : "发起签到");
         recycleView.setLayoutManager(new LinearLayoutManager(this));
         recycleView.setAdapter(mAdapter);
         recycleView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
@@ -467,11 +467,11 @@ public class CourseInfoActivity extends AppCompatActivity {
                         }
                     } else {
                         if (canCheck == 1) {
-                            check.setText("点名中");
+                            check.setText("签到中");
                             check.setClickable(false);
                             check.setBackgroundColor(getResources().getColor(R.color.colorAccent));
                         } else {
-                            check.setText("点名");
+                            check.setText("发起签到");
                             check.setClickable(true);
                             check.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                         }

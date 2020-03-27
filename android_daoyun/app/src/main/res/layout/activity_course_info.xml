@@ -9,10 +9,9 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
-        android:background="@color/colorPrimary"
         app:navigationIcon="@drawable/ic_arrow_back_white_36dp"
         app:title="课程信息"
-        app:titleTextColor="@color/white" />
+        app:titleTextColor="@color/dark" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -68,7 +67,7 @@
                 android:id="@+id/text_use_web"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="如需管理请使用网页版"
+                android:text="如需进行管理请到网页版到云"
                 android:textSize="@dimen/text_S" />
 
         </LinearLayout>
@@ -80,8 +79,11 @@
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:layout_marginEnd="16dp"
-            android:backgroundTint="@color/colorPrimary"
-            android:textColor="@color/white" />
+            android:text="发起签到"
+            android:stateListAnimator="@drawable/state_list_animator_z"
+            android:background="@drawable/bt_shape"
+            android:textColor="@color/colorPrimary"
+            />
 
         <TextView
             android:id="@+id/notify_face"
@@ -106,7 +108,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
-        android:text="学生列表"
+        android:text="成员列表"
         android:textSize="20sp" />
 
     <android.support.v7.widget.RecyclerView

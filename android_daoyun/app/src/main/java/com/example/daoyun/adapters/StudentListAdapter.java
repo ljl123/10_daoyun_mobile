@@ -36,7 +36,7 @@ public class StudentListAdapter extends RecyclerView.Adapter<StudentListAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-        viewHolder.studentName.setText("姓名: "+data.get(i).getName());
+        viewHolder.studentName.setText(data.get(i).getName());
         viewHolder.studentLack.setText("缺勤次数: "+data.get(i).getLack_count());
     }
 
