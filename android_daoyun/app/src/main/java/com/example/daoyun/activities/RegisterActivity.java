@@ -70,14 +70,14 @@ public class RegisterActivity extends AppCompatActivity {
     private static final int WHAT_BACK = 1008;
     @BindView(R.id.regist_back)
     Button registBack;
-    @BindView(R.id.et_phone)
+    @BindView(R.id.et_username)
     EditText etUsername;
     @BindView(R.id.et_verify_code)
     EditText etVerifyCode;
     @BindView(R.id.send_verify_code)
     Button sendVerifyCode;
-    @BindView(R.id.et_email)
-    EditText et_email;
+    @BindView(R.id.et_phone)
+    EditText etPhone;
     @BindView(R.id.et_password)
     EditText etPassword;
     @BindView(R.id.et_repeatpassword)
@@ -209,9 +209,9 @@ public class RegisterActivity extends AppCompatActivity {
         if (checkInput()) {
             WaitDialog.show(RegisterActivity.this, "注册中...");
             Map<String, String> p = new HashMap<>();
-            p.put("phone", etUsername.getText().toString());
+            p.put("email", etUsername.getText().toString());
             p.put("email_code", etVerifyCode.getText().toString());
-            p.put("email", et_email.getText().toString());
+            p.put("phone", etPhone.getText().toString());
             p.put("password", Util.md5(etPassword.getText().toString()));
             p.put("type", typeStateStu ? "3" : "2");
             p.put("name", userName.getText().toString());
@@ -246,7 +246,7 @@ public class RegisterActivity extends AppCompatActivity {
         if (etUsername.getError() != null) return false;
         if (etPassword.getError() != null) return false;
         if (etRepeatpassword.getError() != null) return false;
-        return et_email.getError() == null;
+        return etPhone.getError() == null;
     }
 
 
@@ -428,8 +428,8 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 if (!s.toString().equals("")) {
-                    if (!Pattern.matches(Util.Phone_Reg, s.toString())) {
-                        etUsername.setError("请输入正确的手机号");
+                    if (!Pattern.matches(Util.Email_Reg, s.toString())) {
+                        etUsername.setError("请输入正确的邮箱");
                     } else {
                         etUsername.setError(null);
                     }
@@ -480,7 +480,7 @@ public class RegisterActivity extends AppCompatActivity {
                 }
             }
         });
-        et_email.addTextChangedListener(new TextWatcher() {
+        etPhone.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -494,10 +494,10 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 if (!s.toString().equals("")) {
-                    if (!Pattern.matches(Util.Email_Reg, s.toString())) {
-                        et_email.setError("请输入正确的邮箱");
+                    if (!Pattern.matches(Util.Phone_Reg, s.toString())) {
+                        etPhone.setError("请输入正确的手机号");
                     } else {
-                        et_email.setError(null);
+                        etPhone.setError(null);
                     }
                 }
             }
