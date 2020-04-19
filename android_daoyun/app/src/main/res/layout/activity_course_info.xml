@@ -31,7 +31,7 @@
                 android:id="@+id/course_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/text_XL" />
+                android:textSize="@dimen/text_L" />
 
             <TextView
                 android:id="@+id/teacher_name"
@@ -43,25 +43,25 @@
                 android:id="@+id/course_code"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/text_M" />
+                android:textSize="@dimen/text_L" />
 
             <TextView
                 android:id="@+id/place"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/text_M" />
+                android:textSize="@dimen/text_L" />
 
             <TextView
                 android:id="@+id/stu_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/text_S" />
+                android:textSize="@dimen/text_L" />
 
             <TextView
                 android:id="@+id/sign_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/text_S" />
+                android:textSize="@dimen/text_L" />
 
             <TextView
                 android:id="@+id/text_use_web"
@@ -101,15 +101,6 @@
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
         android:background="@color/black" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="成员列表"
-        android:textSize="20sp" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycle_view"

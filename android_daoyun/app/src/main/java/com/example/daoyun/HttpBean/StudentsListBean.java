@@ -5,16 +5,17 @@ import java.util.List;
 public class StudentsListBean extends DefaultResultBean<List<StudentsListBean>>{
 
     /**
-     * id : 1231
-     * uid : 121412
-     * stu_code : 1241241
-     * name : 张三
+     * id : 1
+     * uid : 1
+     * stu_code : 190327046
+     * name : 李杰铃
      * gender : 男
-     * school : 福大
+     * school : 福州大学
      * department : 数计学院
-     * profession : 计算机专业
-     * phone :
+     * profession : 计算机技术
+     * phone :1875XX
      * lack_count :
+     * check_count：
      */
 
     private String id;
@@ -27,6 +28,7 @@ public class StudentsListBean extends DefaultResultBean<List<StudentsListBean>>{
     private String profession;
     private String phone;
     private String lack_count;
+    private String check_count;
 
     public String getId() {
         return id;
@@ -102,6 +104,14 @@ public class StudentsListBean extends DefaultResultBean<List<StudentsListBean>>{
 
     public String getLack_count() {
         return lack_count;
+    }
+
+    public String getCheck_count() {
+        return check_count;
+    }
+
+    public void setCheck_count(String check_count) {
+        this.check_count = check_count;
     }
 
     public void setLack_count(String lack_count) {

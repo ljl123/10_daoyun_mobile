@@ -242,7 +242,7 @@ public class CourseInfoActivity extends AppCompatActivity {
             protected void onSuccess(DefaultResultBean<Object> objectDefaultResultBean) {
                 if (!objectDefaultResultBean.getResult_code().equals("200")) {
                     check.setClickable(false);
-                    check.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                   // check.setBackgroundColor(getResources().getColor(R.color.colorAccent));
                     notifyFace.setVisibility(View.VISIBLE);
                 }
             }
@@ -461,26 +461,26 @@ public class CourseInfoActivity extends AppCompatActivity {
                     int canCheck = msg.arg1;
                     if (userType.equals("3")) {
                         if (canCheck == 0) {
-                            check.setText("不在签到时间内");
+                            check.setText("无签到");
                             check.setClickable(false);
-                            check.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                            //check.setBackgroundColor(getResources().getColor(R.color.colorAccent));
                         }
                     } else {
                         if (canCheck == 1) {
                             check.setText("签到中");
                             check.setClickable(false);
-                            check.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                            //check.setBackgroundColor(getResources().getColor(R.color.colorAccent));
                         } else {
                             check.setText("发起签到");
                             check.setClickable(true);
-                            check.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                           // check.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                         }
                     }
                     break;
                 case WHAT_GET_CAN_CHECK_FAILED:
                     check.setText("无法操作");
                     check.setClickable(false);
-                    check.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                  //  check.setBackgroundColor(getResources().getColor(R.color.colorAccent));
                     break;
             }
         }

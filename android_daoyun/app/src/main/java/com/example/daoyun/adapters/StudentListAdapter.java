@@ -37,7 +37,7 @@ public class StudentListAdapter extends RecyclerView.Adapter<StudentListAdapter.
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         viewHolder.studentName.setText(data.get(i).getName());
-        viewHolder.studentLack.setText("缺勤次数: "+data.get(i).getLack_count());
+        viewHolder.studentCheck.setText("经验值: "+data.get(i).getCheck_count());
     }
 
     @Override
@@ -49,8 +49,8 @@ public class StudentListAdapter extends RecyclerView.Adapter<StudentListAdapter.
     class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.student_name)
         TextView studentName;
-        @BindView(R.id.student_lack)
-        TextView studentLack;
+        @BindView(R.id.student_check)
+        TextView studentCheck;
         @BindView(R.id.course_list_item)
         LinearLayout courseListItem;
 

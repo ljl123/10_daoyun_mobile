@@ -3,7 +3,7 @@
 
     <item
         android:id="@+id/navigation_my_course"
-        android:icon="@drawable/ic_course_black_24dp"
+        android:icon="@drawable/banke"
         android:title="@string/title_course" />
 
     <item
