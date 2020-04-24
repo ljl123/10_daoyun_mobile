@@ -14,10 +14,10 @@
             android:id="@+id/no_class_notify"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="66dp"
             android:gravity="center"
-            android:text="您还没有添加任何课程"
-            android:textSize="26sp"
+            android:text="暂无班课"
+            android:textSize="30sp"
             android:visibility="gone" />
 
         <android.support.v4.widget.SwipeRefreshLayout

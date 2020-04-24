@@ -21,9 +21,13 @@ import com.example.daoyun.HttpBean.LoginBean;
 import com.example.daoyun.R;
 import com.example.daoyun.http.BaseObserver;
 import com.example.daoyun.http.HttpUtil;
+import com.example.daoyun.qqdemo.APPConstant;
+import com.example.daoyun.qqdemo.BaseUiListener;
 import com.example.daoyun.session.SessionKeeper;
 import com.example.daoyun.utils.LogUtil;
 import com.example.daoyun.utils.ToastUtil;
+import com.tencent.connect.common.Constants;
+import com.tencent.tauth.Tencent;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -50,7 +54,14 @@ public class LoginActivity extends AppCompatActivity {
     TextView tvForgotPassword;
 
     ProgressDialog progressDialog;
-
+    //第三方登录
+    private Tencent mTencent;
+    private BaseUiListener mIUiListener;
+    @BindView(R.id.qq_go)
+    Button qqGo;
+    boolean typeStateStu = true;//是否学生号qq登录
+    @BindView(R.id.bt_switch_type)
+    Button btSwitchType;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +69,8 @@ public class LoginActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         initView();
         initData();
+        //传入参数APPID和全局Context上下文
+        mTencent = Tencent.createInstance(APPConstant.APP_ID, LoginActivity.this.getApplicationContext());
     }
 
     private void initView() {
@@ -123,7 +136,18 @@ public class LoginActivity extends AppCompatActivity {
             });
         }
     }
-
+    @OnClick(R.id.qq_go)
+    public void onQqGoClicked() {
+        int type=typeStateStu ? 3: 2;
+        mIUiListener = new BaseUiListener(LoginActivity.this,mTencent,type);
+        //all表示获取所有权限
+        mTencent.login(LoginActivity.this, "all", mIUiListener);
+    }
+    @OnClick(R.id.bt_switch_type)
+    public void onswitchTypeClicked() {
+        typeStateStu = !typeStateStu;
+        btSwitchType.setText(typeStateStu ? "学生QQ登录" : "教师QQ登录");
+    }
     private static final int REQUEST_EXTERNAL_STORAGE = 10001;
     private static String[] PERMISSIONS_STORAGE = {
             "android.permission.READ_EXTERNAL_STORAGE",
@@ -157,9 +181,6 @@ public class LoginActivity extends AppCompatActivity {
 
     @OnClick(R.id.register_go)
     public void onFabClicked() {
-//        getWindow().setExitTransition(null);
-//        getWindow().setEnterTransition(null);
-//        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(LoginActivity.this, fab, fab.getTransitionName());
         startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
     }
 
@@ -184,6 +205,9 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == Constants.REQUEST_LOGIN) {
+            Tencent.onActivityResultData(requestCode, resultCode, data, mIUiListener);
+        }
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_EXTERNAL_STORAGE) {
             // 检查该权限是否已经获取

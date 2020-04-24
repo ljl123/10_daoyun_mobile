@@ -9,7 +9,7 @@
 
     <android.support.v7.widget.CardView
         android:layout_width="300dp"
-        android:layout_height="300dp"
+        android:layout_height="360dp"
         app:cardCornerRadius="6dp"
         app:cardElevation="3dp"
         app:cardUseCompatPadding="true"
@@ -121,7 +121,26 @@
                     android:text="@string/login_register_bt"
                     android:textColor="@color/colorPrimary"></Button>
             </RelativeLayout>
-
+            <RelativeLayout
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="60dp">
+                <Button
+                    android:id="@+id/qq_go"
+                    android:background="@drawable/qq"
+                    android:stateListAnimator="@drawable/state_list_animator_z"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    >
+                </Button>
+                <Button
+                    android:id="@+id/bt_switch_type"
+                    android:layout_width="100dp"
+                    android:layout_height="50dp"
+                    android:text="学生QQ登录"
+                    android:layout_marginStart="55dp"/>
+            </RelativeLayout>
         </LinearLayout>
     </android.support.v7.widget.CardView>
 

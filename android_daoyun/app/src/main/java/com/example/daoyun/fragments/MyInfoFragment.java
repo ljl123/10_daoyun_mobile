@@ -28,7 +28,6 @@ import com.example.daoyun.HttpBean.DefaultResultBean;
 import com.example.daoyun.HttpBean.UploadAvatarBean;
 import com.example.daoyun.R;
 import com.example.daoyun.activities.LoginActivity;
-import com.example.daoyun.activities.ModifyPasswordActivity;
 import com.example.daoyun.activities.UserInfoActivity;
 import com.example.daoyun.adapters.ChoosePhotoAdapter;
 import com.example.daoyun.http.BaseObserver;
@@ -84,8 +83,6 @@ public class MyInfoFragment extends Fragment {
     LinearLayout editUserFace;
 
     DialogPlus chooseDialog;
-    @BindView(R.id.forgot_password)
-    LinearLayout forgotPassword;
 
     public MyInfoFragment() {
         // Required empty public constructor
@@ -102,11 +99,11 @@ public class MyInfoFragment extends Fragment {
         initDialog();
         take_photo_file_Uri = FileProvider.getUriForFile(
                 getActivity(),
-                "com.example.checkinsystem.fileprovider",
+                "com.example.daoyun.fileprovider",
                 take_photo_file);
         take_face_file_Uri = FileProvider.getUriForFile(
                 getActivity(),
-                "com.example.checkinsystem.fileprovider",
+                "com.example.daoyun.fileprovider",
                 take_face_file);
         if (SessionKeeper.getUserType(this.getActivity()).equals("2")) {
             editUserFace.setVisibility(View.GONE);
@@ -172,10 +169,6 @@ public class MyInfoFragment extends Fragment {
         Objects.requireNonNull(getActivity()).finish();
     }
 
-    @OnClick(R.id.forgot_password)
-    public void onForgotViewClicked() {
-        startActivity(new Intent(getActivity(), ModifyPasswordActivity.class));
-    }
 
     @OnClick(R.id.edit_user_face)
     public void onViewClicked() {
