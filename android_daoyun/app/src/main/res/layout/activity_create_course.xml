@@ -10,11 +10,9 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
-        android:background="@color/colorPrimary"
         android:minHeight="?actionBarSize"
         app:navigationIcon="@drawable/ic_arrow_back_white_36dp"
-        app:title="创建课程"
-        app:titleTextColor="@color/white" />
+        app:title="创建课程" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -30,7 +28,6 @@
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColorHint="@color/colorPrimary"
             android:theme="@style/TextLabel_Primary">
 
             <EditText
@@ -50,7 +47,6 @@
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColorHint="@color/colorPrimary"
             android:theme="@style/TextLabel_Primary">
 
             <EditText
@@ -66,17 +62,10 @@
                 android:textSize="@dimen/input_text_size" />
         </android.support.design.widget.TextInputLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:text="上课时间格式：xx:xx-xx:xx"
-            android:textColor="@color/colorSecondary" />
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColorHint="@color/colorPrimary"
             android:theme="@style/TextLabel_Primary">
 
             <EditText
@@ -95,7 +84,6 @@
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColorHint="@color/colorPrimary"
             android:theme="@style/TextLabel_Primary">
 
             <EditText
@@ -114,7 +102,6 @@
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColorHint="@color/colorPrimary"
             android:theme="@style/TextLabel_Primary">
 
             <EditText
@@ -134,8 +121,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="ps:请在上课地点创建课程，否则定位不准"
-            android:textColor="@color/colorSecondary" />
+            android:text="课程创建后会对此时地点进行定位"
+            android:textColor="@color/colorPrimary" />
     </LinearLayout>
 
     <Button
@@ -145,6 +132,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="32dp"
         android:background="@drawable/bt_shape"
+        android:stateListAnimator="@drawable/state_list_animator_z"
         android:text="提交"
         android:textColor="@color/colorPrimary"
         android:textSize="18sp" />

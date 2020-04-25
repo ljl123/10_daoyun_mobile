@@ -373,6 +373,7 @@
                         android:layout_width="100dp"
                         android:layout_height="40dp"
                         android:background="@drawable/bt_shape"
+                        android:stateListAnimator="@drawable/state_list_animator_z"
                         android:text="切换注册类型"
                         android:textColor="@color/colorPrimary"
                         android:layout_marginStart="8dp"/>
