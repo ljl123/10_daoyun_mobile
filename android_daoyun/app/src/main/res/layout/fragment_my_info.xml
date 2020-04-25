@@ -16,12 +16,7 @@
             android:layout_height="220dp"
             android:layout_marginBottom="24dp">
 
-            <ImageView
-                android:id="@+id/top_bg"
-                android:layout_width="match_parent"
-                android:layout_height="220dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/default_avatar" />
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -40,7 +35,7 @@
                     android:layout_height="80dp"
                     android:layout_marginBottom="8dp"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/default_avatar"
+                    android:src="@drawable/ic_my_black_24dp"
                     app:riv_border_color="@color/white"
                     app:riv_border_width="2dip"
                     app:riv_corner_radius="80dip" />
@@ -55,7 +50,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="昵称"
-                        android:textColor="@color/white"
                         android:textSize="16sp" />
 
                     <TextView
@@ -63,7 +57,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="姓名"
-                        android:textColor="@color/white"
                         android:textSize="16sp" />
 
                 </LinearLayout>

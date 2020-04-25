@@ -2,22 +2,23 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
+
         android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
-        android:minHeight="?actionBarSize"
-        android:background="@color/colorPrimary"
-        app:title="我的信息"
-        app:titleTextColor="@color/white"
-        app:navigationIcon="@drawable/ic_arrow_back_white_36dp"/>
+        android:layout_height="wrap_content">
 
+        <Button
+            android:id="@+id/userinfo_back"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:background="@drawable/ic_arrow_back_white_36dp"/>
 
+    </android.support.v7.widget.Toolbar>
     <LinearLayout
         android:layout_width="250dp"
         android:layout_height="wrap_content"
@@ -31,8 +32,7 @@
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColorHint="@color/colorPrimary"
-            android:theme="@style/TextLabel_Secondary">
+            android:theme="@style/TextLabel_Primary">
 
             <EditText
                 android:id="@+id/nick_name"
@@ -44,14 +44,13 @@
                 android:paddingBottom="2dp"
                 android:textColor="@color/colorPrimary"
                 android:textCursorDrawable="@drawable/bg_input_cursor"
-                android:textSize="18sp" />
+                android:textSize="20sp" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColorHint="@color/colorPrimary"
-            android:theme="@style/TextLabel_Secondary">
+            android:theme="@style/TextLabel_Primary">
 
             <EditText
                 android:id="@+id/phone"
@@ -63,14 +62,13 @@
                 android:paddingBottom="2dp"
                 android:textColor="@color/colorPrimary"
                 android:textCursorDrawable="@drawable/bg_input_cursor"
-                android:textSize="18sp" />
+                android:textSize="20sp" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColorHint="@color/colorPrimary"
-            android:theme="@style/TextLabel_Secondary">
+            android:theme="@style/TextLabel_Primary">
 
             <EditText
                 android:id="@+id/gender"
@@ -82,14 +80,13 @@
                 android:paddingBottom="2dp"
                 android:textColor="@color/colorPrimary"
                 android:textCursorDrawable="@drawable/bg_input_cursor"
-                android:textSize="18sp" />
+                android:textSize="20sp" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColorHint="@color/colorPrimary"
-            android:theme="@style/TextLabel_Secondary">
+            android:theme="@style/TextLabel_Primary">
 
             <EditText
                 android:id="@+id/stu_code"
@@ -101,15 +98,14 @@
                 android:paddingBottom="2dp"
                 android:textColor="@color/colorPrimary"
                 android:textCursorDrawable="@drawable/bg_input_cursor"
-                android:textSize="18sp" />
+                android:textSize="20sp" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/school_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColorHint="@color/colorPrimary"
-            android:theme="@style/TextLabel_Secondary">
+            android:theme="@style/TextLabel_Primary">
 
             <EditText
                 android:id="@+id/school"
@@ -121,15 +117,14 @@
                 android:paddingBottom="2dp"
                 android:textColor="@color/colorPrimary"
                 android:textCursorDrawable="@drawable/bg_input_cursor"
-                android:textSize="16sp" />
+                android:textSize="18sp" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/department_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColorHint="@color/colorPrimary"
-            android:theme="@style/TextLabel_Secondary">
+            android:theme="@style/TextLabel_Primary">
 
             <EditText
                 android:id="@+id/department"
@@ -141,15 +136,14 @@
                 android:paddingBottom="2dp"
                 android:textColor="@color/colorPrimary"
                 android:textCursorDrawable="@drawable/bg_input_cursor"
-                android:textSize="16sp" />
+                android:textSize="18sp" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/profession_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColorHint="@color/colorPrimary"
-            android:theme="@style/TextLabel_Secondary">
+            android:theme="@style/TextLabel_Primary">
 
             <EditText
                 android:id="@+id/profession"
@@ -161,18 +155,20 @@
                 android:paddingBottom="2dp"
                 android:textColor="@color/colorPrimary"
                 android:textCursorDrawable="@drawable/bg_input_cursor"
-                android:textSize="16sp" />
+                android:textSize="18sp" />
         </android.support.design.widget.TextInputLayout>
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/save"
+    <com.droidbond.loadingbutton.LoadingButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:background="@color/colorPrimary"
-        android:text="保存"
-        android:textColor="@color/white"
-        android:textSize="20sp" />
+        android:id="@+id/save"
+        custom:text="保存"
+        custom:textColor="@color/colorPrimary"
+        custom:background="@drawable/bt_shape"
+        custom:textSize="18sp"
+        android:layout_marginTop="32dp"
+        custom:progressColor="@color/colorPrimary"
+        android:layout_gravity="center_horizontal"/>
 </LinearLayout>

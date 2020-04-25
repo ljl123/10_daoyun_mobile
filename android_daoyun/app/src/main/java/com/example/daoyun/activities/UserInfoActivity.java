@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.droidbond.loadingbutton.LoadingButton;
 import com.example.daoyun.HttpBean.DefaultResultBean;
 import com.example.daoyun.HttpBean.DictInfoListBean;
 import com.example.daoyun.HttpBean.LoginBean;
@@ -52,7 +53,7 @@ public class UserInfoActivity extends AppCompatActivity {
     @BindView(R.id.profession)
     EditText profession;
     @BindView(R.id.save)
-    Button save;
+    LoadingButton save;
     @BindView(R.id.school_input)
     TextInputLayout schoolInput;
     @BindView(R.id.department_input)
@@ -69,8 +70,8 @@ public class UserInfoActivity extends AppCompatActivity {
     DataForm departmentForm = new DataForm();
     DataForm professionForm = new DataForm();
     List<List<DictInfoListBean>> data = new ArrayList<>();
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
+    @BindView(R.id.userinfo_back)
+    Button userinfodBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,7 +115,6 @@ public class UserInfoActivity extends AppCompatActivity {
     @SuppressLint("ClickableViewAccessibility")
     private void initView() {
         user = SessionKeeper.getUserInfo(this);
-        toolbar.setNavigationOnClickListener(v -> onBackPressed());
         nickName.setText(user.getNick_name());
         phone.setText(user.getPhone());
         gender.setText(user.getGender());
@@ -126,7 +126,10 @@ public class UserInfoActivity extends AppCompatActivity {
         department.setOnTouchListener(this::onActUserDepartmentTouched);
         profession.setOnTouchListener(this::onActUserProfessionTouched);
     }
-
+    @OnClick(R.id.userinfo_back)
+    public void onUserinfodBackClicked() {
+        onBackPressed();
+    }
     @OnClick(R.id.save)
     public void onSaveClicked() {
         save.setClickable(false);

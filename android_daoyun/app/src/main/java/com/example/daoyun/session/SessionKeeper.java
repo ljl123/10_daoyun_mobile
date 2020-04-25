@@ -29,20 +29,7 @@ public class SessionKeeper {
     protected static final String USER_INFO = "userInfo";
     //用户类型
     protected static final String USER_TYPE = "userType";
-//    //个人资料公开
-//    protected static final String SHOW_PERSONAL_INFO = "showPersonalInfo";
-//    //反馈
-//    protected static final String FEED_BACK = "feedBack";
-//    //显示地点
-//    protected static final String SHOW_LOCATION = "showLocation";
-//    //消息提醒
-//    protected static final String IS_NOTIFY = "isNotify";
-//    //声音
-//    protected static final String IS_SOUND = "isSound";
-//    //震动
-//    protected static final String IS_SHOCK = "isShock";
-//    //旅途数
-//    protected static final String TRAVEL_NUMBER = "travelNumber";
+
 
     public static void keepUserInfo(Context context, LoginBean info) {
         SharedPreferences sp = context.getSharedPreferences(TAG, 0);

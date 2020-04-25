@@ -77,8 +77,6 @@ public class MyInfoFragment extends Fragment {
     @BindView(R.id.quit)
     LinearLayout quit;
     Unbinder unbinder;
-    @BindView(R.id.top_bg)
-    ImageView topBg;
     @BindView(R.id.edit_user_face)
     LinearLayout editUserFace;
 
@@ -119,18 +117,10 @@ public class MyInfoFragment extends Fragment {
         Glide.with(this)
                 .asBitmap()
                 .load(SessionKeeper.getUserAvatar(getActivity()))
-                .placeholder(R.drawable.default_avatar)
-                .error(R.mipmap.ic_launcher)
+                .placeholder(R.drawable.ic_my_black_24dp)
+                .error(R.drawable.ic_my_black_24dp)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(avatar);
-        Glide.with(getActivity())
-                .asBitmap()
-                .load(SessionKeeper.getUserAvatar(getActivity()))
-                .placeholder(R.drawable.default_avatar)
-                .error(R.drawable.default_avatar)
-                .transform(new BlurTransformation(25, 3))
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .into(topBg);
     }
 
     @Override

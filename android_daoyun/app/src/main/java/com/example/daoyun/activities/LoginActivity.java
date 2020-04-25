@@ -81,10 +81,13 @@ public class LoginActivity extends AppCompatActivity {
 
     private void initData() {
         verifyStoragePermissions(this);
-        etUsername.setText(SessionKeeper.getUserEmail(LoginActivity.this));
-        etPassword.setText(SessionKeeper.getUserPassword(LoginActivity.this));
-        if (SessionKeeper.getAutoLogin(this)) {
-            onBtGoClicked();
+        String email=SessionKeeper.getUserEmail(LoginActivity.this);
+        if(email!=""){
+            etUsername.setText(email);
+            etPassword.setText(SessionKeeper.getUserPassword(LoginActivity.this));
+            if (SessionKeeper.getAutoLogin(this)) {
+                onBtGoClicked();
+            }
         }
     }
 
@@ -139,6 +142,11 @@ public class LoginActivity extends AppCompatActivity {
     @OnClick(R.id.qq_go)
     public void onQqGoClicked() {
         int type=typeStateStu ? 3: 2;
+//        LoginBean loginBean=new LoginBean();
+//        loginBean.setType(type);
+//        // loginBean.setToken("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtc2ciOiI1LDE1ODc3NDA2MzgyNjkiLCJpYXQiOjE1ODc3NDEwMDEsImV4cCI6MTU4ODEwMTAwMX0.LIsXFro1xCDf0aB5AnLlZBjQaEUfIEEcj37qXLeo-aU");
+//        saveData(loginBean);
+//        loginSuccess();
         mIUiListener = new BaseUiListener(LoginActivity.this,mTencent,type);
         //all表示获取所有权限
         mTencent.login(LoginActivity.this, "all", mIUiListener);

@@ -27,15 +27,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
-                android:queryHint="搜索课程"/>
+                android:queryHint="搜索班课"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="8dp"
-                android:text="可以通过课程名、课程代码、任课教师搜索课程"
-                android:textColor="@color/colorSecondary" />
+                android:text="输入课程名搜索班课"
+                android:textColor="@color/colorPrimary" />
 
             <android.support.v4.widget.SwipeRefreshLayout
                 android:id="@+id/refresh_view"
@@ -56,12 +56,11 @@
             android:id="@+id/fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="50dp"
-            android:backgroundTint="@color/colorPrimary"
-            android:src="@drawable/ic_add_white_24dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="60dp"
+            android:backgroundTint="@color/colorSecondary"
+            android:src="@drawable/ic_add_black_24dp"
             app:fabSize="normal" />
 
     </RelativeLayout>
