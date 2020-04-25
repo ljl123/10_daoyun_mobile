@@ -12,7 +12,7 @@
         android:layout_height="?actionBarSize"
         android:minHeight="?actionBarSize"
         app:navigationIcon="@drawable/ic_arrow_back_white_36dp"
-        app:title="创建课程" />
+        app:title="创建班课" />
 
     <LinearLayout
         android:layout_width="match_parent"
