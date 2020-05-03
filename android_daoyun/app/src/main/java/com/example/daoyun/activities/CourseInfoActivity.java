@@ -60,8 +60,6 @@ public class CourseInfoActivity extends AppCompatActivity {
     private static final int WHAT_GET_CAN_CHECK_FAILED = 9;
     private static final int REQUEST_TAKE_MEDIA = 102;
 
-    File take_photo_file = new File(Environment.getExternalStorageDirectory() + File.separator + "Pictures", "checkface.jpg");
-    Uri take_photo_file_uri;
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -96,7 +94,6 @@ public class CourseInfoActivity extends AppCompatActivity {
 
     ProgressDialog progressDialog;
 
-    boolean useFace = HttpBase.USE_FACE_INFO;
 
     boolean canCheck = false;
 
@@ -350,33 +347,7 @@ public class CourseInfoActivity extends AppCompatActivity {
      * 签到
      */
     private void sign() {
-        refreshImageUri();
-        if (useFace)
-            startCamera();
-        else
-            sendSignRequest();
-    }
-
-    private void startCamera() {
-        //启动相机
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, take_photo_file_uri);
-        startActivityForResult(intent, REQUEST_TAKE_MEDIA);
-    }
-
-    private void refreshImageUri() {
-        try {
-            if (take_photo_file.exists()) {
-                take_photo_file.delete();
-            }
-            take_photo_file.createNewFile();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        take_photo_file_uri = FileProvider.getUriForFile(
-                getActivityContext(),
-                "com.example.checkinsystem.fileprovider",
-                take_photo_file);
+        sendSignRequest();
     }
 
     private void sendSignRequest() {
@@ -388,7 +359,7 @@ public class CourseInfoActivity extends AppCompatActivity {
         params.put("course_id", courseId);
         params.put("time", now);
         params.put("location", GPSUtils.getInstance(this).getLocationString());
-        HttpUtil.check(params, take_photo_file.getPath(), new BaseObserver<DefaultResultBean<Boolean>>() {
+        HttpUtil.check(params, new BaseObserver<DefaultResultBean<Boolean>>() {
             @Override
             protected void onSuccess(DefaultResultBean<Boolean> booleanDefaultResultBean) {
                 if (booleanDefaultResultBean.getResult_code().equals("200")) {

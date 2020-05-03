@@ -352,7 +352,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void switchType() {
-        btSwitchType.setText(typeStateStu ? "注册教师版" : "注册学生版");
+        btSwitchType.setText(typeStateStu ? "切换注册教师" : "切换注册学生");
         llStu.setVisibility(typeStateStu ? View.VISIBLE : View.GONE);
         llTeacher.setVisibility(typeStateStu ? View.GONE : View.VISIBLE);
     }

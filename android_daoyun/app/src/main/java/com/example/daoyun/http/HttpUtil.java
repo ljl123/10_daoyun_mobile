@@ -315,36 +315,13 @@ public class HttpUtil extends HttpBase {
      * 签到模块  <=============================================================================>
      */
 
-    public static void check(Map<String, String> params, String fileUrl, BaseObserver<DefaultResultBean<Boolean>> callback) {
+    public static void check(Map<String, String> params, BaseObserver<DefaultResultBean<Boolean>> callback) {
         Retrofit retrofit = init();
         RetrofitInterface service = retrofit.create(RetrofitInterface.class);
-//
-//        File file = new File(Environment.getExternalStorageDirectory() + "/upload_face_info.jpg");
-//        String origin_length = String.valueOf(file.length());
-//        BufferedOutputStream baos = null;
-//        try {
-//            if(HttpBase.USE_FACE_INFO) {
-//                baos = new BufferedOutputStream(new FileOutputStream(file));
-//                Bitmap bit = BitmapFactory.decodeFile(fileUrl);
-//                bit.compress(Bitmap.CompressFormat.JPEG, 50, baos);
-//                baos.flush();
-//                baos.close();
-//                Log.i("wechat", "压缩前图片的大小:" + origin_length + "byte \n" + "压缩后图片的大小:" + String.valueOf(file.length()) + "byte");
-//            }else{
-//                file = new File(fileUrl);
-//            }
-//            RequestBody requestFile = RequestBody.create(MediaType.parse("image/jpg"), file);
-//            MultipartBody.Part body = MultipartBody.Part.createFormData("face", file.getName(), requestFile);
-
-//            service.httpCheckInterface(params, body)
-            service.httpCheckInterface(params)
+        service.httpCheckInterface(params)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(callback);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            callback.onFailure(e, false);
-//        }
     }
 
     public static void startCheck(Map<String, String> params, BaseObserver<DefaultResultBean<Object>> callback) {
