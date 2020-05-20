@@ -42,9 +42,9 @@ public class CoursesListAdapter extends RecyclerView.Adapter<CoursesListAdapter.
         if (mOnItemClickListener != null) {
             holder.courseListItem.setOnClickListener(view -> mOnItemClickListener.onItemClick(view, position));
         }
-        holder.courseNameTV.setText(bean.getCourse_name());
-        holder.courseTeacherTV.setText(bean.getTeacher());
-        holder.courseTimeTV.setText(bean.getTime());
+        holder.courseNameTV.setText("课程名称："+bean.getCourse_name());
+        holder.courseTeacherTV.setText("任课教师："+bean.getTeacher());
+        holder.courseTimeTV.setText("时间："+bean.getTime());
     }
 
     @Override

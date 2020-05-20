@@ -77,8 +77,6 @@ public class MyInfoFragment extends Fragment {
     @BindView(R.id.quit)
     LinearLayout quit;
     Unbinder unbinder;
-    @BindView(R.id.edit_user_face)
-    LinearLayout editUserFace;
 
     DialogPlus chooseDialog;
 
@@ -103,11 +101,6 @@ public class MyInfoFragment extends Fragment {
                 getActivity(),
                 "com.example.daoyun.fileprovider",
                 take_face_file);
-        if (SessionKeeper.getUserType(this.getActivity()).equals("2")) {
-            editUserFace.setVisibility(View.GONE);
-        }
-        if(!HttpBase.USE_FACE_INFO)
-            editUserFace.setVisibility(View.GONE);
         return view;
     }
 
@@ -160,13 +153,7 @@ public class MyInfoFragment extends Fragment {
     }
 
 
-    @OnClick(R.id.edit_user_face)
-    public void onViewClicked() {
-        refreshImageUri(take_face_file_Uri);
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, take_face_file_Uri);
-        startActivityForResult(intent, REQUEST_PICK_FACE);
-    }
+
 
     public Context getContext() {
         return getActivity();

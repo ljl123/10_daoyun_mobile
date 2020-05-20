@@ -46,7 +46,6 @@ public class SessionKeeper {
     public static void keepToken(Context context, String token) {
         SharedPreferences sp = context.getSharedPreferences(TAG, 0);
         SharedPreferences.Editor editor = sp.edit();
-        Log.d("token","1122 "+token);
         editor.putString(TOKEN, token);
         editor.apply();
     }

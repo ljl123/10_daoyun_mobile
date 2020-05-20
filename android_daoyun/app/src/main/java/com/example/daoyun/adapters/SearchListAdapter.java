@@ -43,9 +43,9 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         SearchListBean bean = data.get(i);
-        viewHolder.courseName.setText(bean.getCourse_name());
-        viewHolder.courseTeacher.setText(bean.getTeacher());
-        viewHolder.courseTime.setText(bean.getTime());
+        viewHolder.courseName.setText("课程名称："+bean.getCourse_name());
+        viewHolder.courseTeacher.setText("任课教师："+bean.getTeacher());
+        viewHolder.courseTime.setText("时间："+bean.getTime());
         viewHolder.addCourse.setOnClickListener(v -> mOnListListener.onButtonClick(v, data.get(i).getCourse_id()));
         viewHolder.searchListItem.setOnClickListener(v -> mOnListListener.onItemClick(v, data.get(i).getCourse_id()));
         if (this.userType.equals("2"))
@@ -53,7 +53,7 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
         else if (bean.getAdded() == 1) {
             viewHolder.addCourse.setClickable(false);
             viewHolder.addCourse.setText("已添加");
-            viewHolder.addCourse.setBackgroundColor(context.getColor(R.color.colorSecondary));
+            //viewHolder.addCourse.setBackgroundColor(context.getColor(R.color.colorSecondary));
         }
     }
 

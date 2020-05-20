@@ -109,7 +109,7 @@ public class LoginActivity extends AppCompatActivity {
             String pwd = etPassword.getText().toString();
             Map<String, String> params = new HashMap<>();
             params.put("username", etUsername.getText().toString());
-            params.put("password", pwd.length() > 20 ? pwd : md5(pwd));
+            params.put("password", md5(pwd));
             HttpUtil.login(params, new BaseObserver<LoginBean>() {
                 @Override
                 protected void onSuccess(LoginBean loginBean) {
@@ -144,6 +144,7 @@ public class LoginActivity extends AppCompatActivity {
         int type=typeStateStu ? 3: 2;
 //        LoginBean loginBean=new LoginBean();
 //        loginBean.setType(type);
+//        loginBean.setToken("1");
 //        // loginBean.setToken("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtc2ciOiI1LDE1ODc3NDA2MzgyNjkiLCJpYXQiOjE1ODc3NDEwMDEsImV4cCI6MTU4ODEwMTAwMX0.LIsXFro1xCDf0aB5AnLlZBjQaEUfIEEcj37qXLeo-aU");
 //        saveData(loginBean);
 //        loginSuccess();

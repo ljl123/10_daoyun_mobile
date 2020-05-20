@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.example.daoyun.HttpBean.CoursesListBean;
 import com.example.daoyun.R;
 import com.example.daoyun.activities.CourseInfoActivity;
+import com.example.daoyun.activities.LoginActivity;
 import com.example.daoyun.adapters.CoursesListAdapter;
 import com.example.daoyun.http.BaseObserver;
 import com.example.daoyun.http.HttpUtil;
@@ -169,6 +170,9 @@ public class MainFragment extends Fragment {
                 case WHAT_GET_DATA_FAILED:
                     if (mRefreshCourseList != null && mRefreshCourseList.isRefreshing())
                         mRefreshCourseList.setRefreshing(false);
+                    //网络失败的话返回登录界面
+                    Intent intent = new Intent(getActivity(), LoginActivity.class);
+                    startActivity(intent);
                     break;
             }
         }
