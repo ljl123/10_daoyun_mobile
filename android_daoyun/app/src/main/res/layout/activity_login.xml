@@ -134,12 +134,12 @@
                     android:layout_height="50dp"
                     >
                 </Button>
-                <Button
-                    android:id="@+id/bt_switch_type"
-                    android:layout_width="100dp"
-                    android:layout_height="50dp"
-                    android:text="学生QQ登录"
-                    android:layout_marginStart="55dp"/>
+<!--                <Button-->
+<!--                    android:id="@+id/bt_switch_type"-->
+<!--                    android:layout_width="100dp"-->
+<!--                    android:layout_height="50dp"-->
+<!--                    android:text="学生QQ登录"-->
+<!--                    android:layout_marginStart="55dp"/>-->
             </RelativeLayout>
         </LinearLayout>
     </android.support.v7.widget.CardView>

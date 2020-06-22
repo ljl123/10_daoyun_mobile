@@ -15,4 +15,6 @@
     <dimen name="text_M">18sp</dimen>
     <dimen name="text_S">16sp</dimen>
     <dimen name="text_XS">16sp</dimen>
+    <dimen name="standard_padding">8dip</dimen>
+    <dimen name="half_padding">4dip</dimen>
 </resources>

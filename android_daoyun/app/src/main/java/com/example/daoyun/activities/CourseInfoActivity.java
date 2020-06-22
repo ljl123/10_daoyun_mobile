@@ -79,8 +79,6 @@ public class CourseInfoActivity extends AppCompatActivity {
     Button check;
     @BindView(R.id.recycle_view)
     RecyclerView recycleView;
-    @BindView(R.id.notify_face)
-    TextView notifyFace;
     @BindView(R.id.place)
     TextView place;
 
@@ -230,29 +228,6 @@ public class CourseInfoActivity extends AppCompatActivity {
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("正在签到.....");
         progressDialog.setCancelable(false);
-    }
-
-    private void checkFaceInfo() {
-        if (!userType.equals("3")) return;
-        HttpUtil.getFaceExist(SessionKeeper.getToken(CourseInfoActivity.this), new BaseObserver<DefaultResultBean<Object>>() {
-            @Override
-            protected void onSuccess(DefaultResultBean<Object> objectDefaultResultBean) {
-                if (!objectDefaultResultBean.getResult_code().equals("200")) {
-                    check.setClickable(false);
-                   // check.setBackgroundColor(getResources().getColor(R.color.colorAccent));
-                    notifyFace.setVisibility(View.VISIBLE);
-                }
-            }
-
-            @Override
-            protected void onFailure(Throwable e, boolean isNetWorkError) {
-                if (isNetWorkError) {
-                    mHandler.sendEmptyMessage(WHAT_NETWORK_ERROR);
-                } else {
-                    mHandler.sendEmptyMessage(WHAT_REQUEST_FAILED);
-                }
-            }
-        });
     }
 
     @OnClick(R.id.check)

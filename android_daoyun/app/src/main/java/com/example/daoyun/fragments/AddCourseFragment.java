@@ -1,15 +1,20 @@
 package com.example.daoyun.fragments;
 
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -18,6 +23,7 @@ import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 
 import com.example.daoyun.HttpBean.DefaultResultBean;
@@ -31,7 +37,9 @@ import com.example.daoyun.http.HttpUtil;
 import com.example.daoyun.session.SessionKeeper;
 import com.example.daoyun.utils.LogUtil;
 import com.example.daoyun.utils.ToastUtil;
+import com.example.daoyun.zxing.android.CaptureActivity;
 import com.google.gson.Gson;
+import com.kongzue.dialog.v2.TipDialog;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -76,12 +84,59 @@ public class AddCourseFragment extends Fragment implements SearchListAdapter.OnL
     FloatingActionButton fab;
     @BindView(R.id.focus)
     LinearLayout focus;
+    //二维码扫描
+    @BindView(R.id.scan)
+    Button scan;
+    private static final String DECODED_CONTENT_KEY = "codedContent";
+    private static final String DECODED_BITMAP_KEY = "codedBitmap";
+    private static final int REQUEST_CODE_SCAN = 0x0000;
+    @OnClick(R.id.scan)
+    public void onScanClicked() {
+        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            this.requestPermissions(new String[]{Manifest.permission.CAMERA}, 1);
+        } else {
+            goScan();
+        }
+    }
+    /**
+     * 跳转到扫码界面扫码
+     */
+    private void goScan(){
+        Intent intent = new Intent(getActivity(), CaptureActivity.class);
+        startActivityForResult(intent, REQUEST_CODE_SCAN);
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case 1:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    goScan();
+                } else {
+                    ToastUtil.showMessage(getActivity(), "您拒绝了权限申请，可能无法打开相机扫码", ToastUtil.LENGTH_LONG);
+                }
+                break;
+            default:
+        }
+    }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        // 扫描二维码/条码回传
+        if (requestCode == REQUEST_CODE_SCAN && resultCode == getActivity().RESULT_OK) {
+            if (data != null) {
+                //返回的文本内容
+                String content = data.getStringExtra(DECODED_CONTENT_KEY);
+                //返回的BitMap图像
+                Bitmap bitmap = data.getParcelableExtra(DECODED_BITMAP_KEY);
+                ToastUtil.showMessage(getActivity(),content, ToastUtil.LENGTH_LONG);
+                searchCourse(content);
+            }
+        }
+    }
     public AddCourseFragment() {
         // Required empty public constructor
     }
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

@@ -17,7 +17,11 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <!-- QQ登录授权所需权限 -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
+    <!-- 二维码扫描所需权限 -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
     <application
         android:allowBackup="true"
         android:appComponentFactory="android.support.v4.app.CoreComponentFactory"
@@ -42,6 +46,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".activities.CourseInfoActivity" />
+        <!-- 二维码扫描 -->
+        <activity
+            android:name=".zxing.android.CaptureActivity"
+            android:theme="@android:style/Theme.NoTitleBar" />
         <activity
             android:name=".activities.MainActivity"
             android:label="@string/app_name" />

@@ -170,6 +170,7 @@ public class MainFragment extends Fragment {
                 case WHAT_GET_DATA_FAILED:
                     if (mRefreshCourseList != null && mRefreshCourseList.isRefreshing())
                         mRefreshCourseList.setRefreshing(false);
+                    ToastUtil.showMessage(getActivity(), "如是QQ登录失败，请换普通登录", ToastUtil.LENGTH_LONG);
                     //网络失败的话返回登录界面
                     Intent intent = new Intent(getActivity(), LoginActivity.class);
                     startActivity(intent);

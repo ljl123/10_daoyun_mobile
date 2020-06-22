@@ -51,4 +51,5 @@ dependencies {
     implementation 'com.makeramen:roundedimageview:2.3.0'
     implementation 'com.orhanobut:dialogplus:1.11@aar'
     implementation files('libs/open_sdk_r4de39fa_lite.jar')
+    implementation files('libs/core-3.0.0.jar')
 }

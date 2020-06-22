@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatAutoCompleteTextView;
 import android.support.v7.widget.CardView;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.transition.Transition;
 import android.transition.TransitionInflater;
@@ -246,6 +247,12 @@ public class RegisterActivity extends AppCompatActivity {
         if (etUsername.getError() != null) return false;
         if (etPassword.getError() != null) return false;
         if (etRepeatpassword.getError() != null) return false;
+        if(TextUtils.isEmpty(etUsername.getText().toString())||TextUtils.isEmpty(etVerifyCode.getText().toString())||
+                TextUtils.isEmpty(etPhone.getText().toString())||TextUtils.isEmpty(etPassword.getText().toString())||
+                TextUtils.isEmpty(etRepeatpassword.getText().toString())){
+            TipDialog.show(RegisterActivity.this, "必填字段不能为空", TipDialog.SHOW_TIME_SHORT, TipDialog.TYPE_ERROR);
+            return false;
+        }
         return etPhone.getError() == null;
     }
 

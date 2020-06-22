@@ -60,8 +60,8 @@ public class LoginActivity extends AppCompatActivity {
     @BindView(R.id.qq_go)
     Button qqGo;
     boolean typeStateStu = true;//是否学生号qq登录
-    @BindView(R.id.bt_switch_type)
-    Button btSwitchType;
+//    @BindView(R.id.bt_switch_type)
+//    Button btSwitchType;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -109,7 +109,7 @@ public class LoginActivity extends AppCompatActivity {
             String pwd = etPassword.getText().toString();
             Map<String, String> params = new HashMap<>();
             params.put("username", etUsername.getText().toString());
-            params.put("password", md5(pwd));
+            params.put("password", pwd.length() > 20 ? pwd : md5(pwd));
             HttpUtil.login(params, new BaseObserver<LoginBean>() {
                 @Override
                 protected void onSuccess(LoginBean loginBean) {
@@ -152,11 +152,11 @@ public class LoginActivity extends AppCompatActivity {
         //all表示获取所有权限
         mTencent.login(LoginActivity.this, "all", mIUiListener);
     }
-    @OnClick(R.id.bt_switch_type)
-    public void onswitchTypeClicked() {
-        typeStateStu = !typeStateStu;
-        btSwitchType.setText(typeStateStu ? "学生QQ登录" : "教师QQ登录");
-    }
+//    @OnClick(R.id.bt_switch_type)
+//    public void onswitchTypeClicked() {
+//        typeStateStu = !typeStateStu;
+//        btSwitchType.setText(typeStateStu ? "学生QQ登录" : "教师QQ登录");
+//    }
     private static final int REQUEST_EXTERNAL_STORAGE = 10001;
     private static String[] PERMISSIONS_STORAGE = {
             "android.permission.READ_EXTERNAL_STORAGE",

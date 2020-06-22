@@ -71,7 +71,7 @@ public class BaseUiListener implements IUiListener {
                         loginBean.setUid(1000);//由于openID可能太长了，先直接就固定一个用户吧
                         loginBean.setType(type);
                         loginBean.setNick_name(nickName);
-                       // loginBean.setToken("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtc2ciOiI1LDE1ODc3NDA2MzgyNjkiLCJpYXQiOjE1ODc3NDEwMDEsImV4cCI6MTU4ODEwMTAwMX0.LIsXFro1xCDf0aB5AnLlZBjQaEUfIEEcj37qXLeo-aU");
+                        //loginBean.setToken("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtc2ciOiI1LDE1ODc3NDA2MzgyNjkiLCJpYXQiOjE1ODc3NDEwMDEsImV4cCI6MTU4ODEwMTAwMX0.LIsXFro1xCDf0aB5AnLlZBjQaEUfIEEcj37qXLeo-aU");
                         saveData(loginBean);
                         loginSuccess();
                     } catch (JSONException e) {
