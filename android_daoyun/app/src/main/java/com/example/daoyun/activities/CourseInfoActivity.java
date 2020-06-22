@@ -235,56 +235,9 @@ public class CourseInfoActivity extends AppCompatActivity {
         if (userType.equals("3")) {
             sign();
         } else {
-            BottomMenu.show(CourseInfoActivity.this, new String[]{"选择持续时间", "1分钟", "2分钟", "5分钟", "10分钟", "30分钟", "手动输入"}, ((text, index) -> {
-                if (index != 0) {
-                    onTimePicked(index);
-                }
-            }), true);
+            duration_time = 60 * 1000 * 60;//直接默认给1小时
+            startCheck();
         }
-    }
-
-    private void onTimePicked(int index) {
-        switch (index) {
-            case 2:
-                duration_time = 2 * 1000 * 60;
-                break;
-            case 3:
-                duration_time = 5 * 1000 * 60;
-                break;
-            case 4:
-                duration_time = 10 * 1000 * 60;
-                break;
-            case 5:
-                duration_time = 30 * 1000 * 60;
-                break;
-            case 6:
-                InputDialog.show(getActivityContext(),
-                        "输入持续时间",
-                        "输入为分钟数",
-                        "确定", (dialog, inputText) -> {
-                            if (inputText.isEmpty())
-                                ToastUtil.showMessage(getActivityContext(), "不能为空");
-                            else {
-                                Pattern p = Pattern.compile("[0-9]*");
-                                if (p.matcher(inputText).matches()) {
-                                    //noinspection ConstantConditions
-                                    duration_time = (long) Double.parseDouble(inputText) * 60 * 1000;
-//                                    Log.d("duration_time",String.valueOf(duration_time));
-                                    dialog.dismiss();
-                                    startCheck();
-                                } else {
-                                    ToastUtil.showMessage(getActivityContext(), "请输入数字");
-                                }
-                            }
-                        },
-                        "取消", (dialog, which) -> {
-                            duration_time = 1000 * 60;
-                        });
-                break;
-            default:
-                duration_time = 1000 * 60;
-        }
-        if (index != 6) startCheck();
     }
 
     /**
