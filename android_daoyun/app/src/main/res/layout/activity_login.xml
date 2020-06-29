@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context="com.example.daoyun.activities.LoginActivity">
+    tools:context="com.example.ten_daoyun.activities.LoginActivity">
 
     <android.support.v7.widget.CardView
         android:layout_width="300dp"
