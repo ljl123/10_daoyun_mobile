@@ -15,7 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.example.ten_daoyun.HttpBean.LoginBean;
+import com.example.ten_daoyun.httpBean.LoginBean;
 import com.example.ten_daoyun.R;
 import com.example.ten_daoyun.http.BaseObserver;
 import com.example.ten_daoyun.http.HttpUtil;

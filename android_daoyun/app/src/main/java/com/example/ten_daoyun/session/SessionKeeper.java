@@ -3,7 +3,7 @@ package com.example.ten_daoyun.session;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.example.ten_daoyun.HttpBean.LoginBean;
+import com.example.ten_daoyun.httpBean.LoginBean;
 import com.example.ten_daoyun.utils.LogUtil;
 import com.google.gson.Gson;
 

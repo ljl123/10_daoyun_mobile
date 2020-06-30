@@ -132,6 +132,7 @@
                     android:stateListAnimator="@drawable/state_list_animator_z"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
+                    android:visibility="invisible"
                     >
                 </Button>
 <!--                <Button-->

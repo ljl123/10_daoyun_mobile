@@ -16,9 +16,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
-import com.example.ten_daoyun.HttpBean.DefaultResultBean;
-import com.example.ten_daoyun.HttpBean.DictInfoListBean;
-import com.example.ten_daoyun.HttpBean.RegisterBean;
+import com.example.ten_daoyun.httpBean.DefaultResultBean;
+import com.example.ten_daoyun.httpBean.DictInfoListBean;
+import com.example.ten_daoyun.httpBean.RegisterBean;
 import com.example.ten_daoyun.R;
 import com.example.ten_daoyun.http.BaseObserver;
 import com.example.ten_daoyun.http.HttpUtil;
@@ -56,8 +56,6 @@ public class RegisterActivity extends AppCompatActivity {
     private static final int WHAT_OPERATION_SUCCESS = 1005;
     //操作失败
     private static final int WHAT_OPERATION_FAIL = 1006;
-    //取消加载按钮动画
-    private static final int WHAT_HIDE_LOADING = 1007;
     //注册成功 返回
     private static final int WHAT_BACK = 1008;
     @BindView(R.id.regist_back)
@@ -240,7 +238,7 @@ public class RegisterActivity extends AppCompatActivity {
         if (etRepeatpassword.getError() != null) return false;
         if(TextUtils.isEmpty(etUsername.getText().toString())||TextUtils.isEmpty(etVerifyCode.getText().toString())||
                 TextUtils.isEmpty(etPhone.getText().toString())||TextUtils.isEmpty(etPassword.getText().toString())||
-                TextUtils.isEmpty(etRepeatpassword.getText().toString())){
+                TextUtils.isEmpty(etRepeatpassword.getText().toString())||TextUtils.isEmpty(userName.getText().toString())){
             TipDialog.show(RegisterActivity.this, "必填字段不能为空", TipDialog.SHOW_TIME_SHORT, TipDialog.TYPE_ERROR);
             return false;
         }

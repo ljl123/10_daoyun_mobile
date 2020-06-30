@@ -25,8 +25,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
-import com.example.ten_daoyun.HttpBean.DefaultResultBean;
-import com.example.ten_daoyun.HttpBean.SearchListBean;
+import com.example.ten_daoyun.httpBean.DefaultResultBean;
+import com.example.ten_daoyun.httpBean.SearchListBean;
 import com.example.ten_daoyun.R;
 import com.example.ten_daoyun.activities.CourseInfoActivity;
 import com.example.ten_daoyun.activities.CreateCourseActivity;
@@ -72,7 +72,6 @@ public class AddCourseFragment extends Fragment implements SearchListAdapter.OnL
 
     int page = 1;
     int page_size = 10;
-    int oldState;
 
     boolean noMoreData = false;
     boolean loadingAppendData = false;
@@ -116,7 +115,7 @@ public class AddCourseFragment extends Fragment implements SearchListAdapter.OnL
             default:
         }
     }
-
+    String content="";
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -124,11 +123,11 @@ public class AddCourseFragment extends Fragment implements SearchListAdapter.OnL
         if (requestCode == REQUEST_CODE_SCAN && resultCode == getActivity().RESULT_OK) {
             if (data != null) {
                 //返回的文本内容
-                String content = data.getStringExtra(DECODED_CONTENT_KEY);
+                content = data.getStringExtra(DECODED_CONTENT_KEY);
                 //返回的BitMap图像
                 Bitmap bitmap = data.getParcelableExtra(DECODED_BITMAP_KEY);
                 ToastUtil.showMessage(getActivity(),content, ToastUtil.LENGTH_LONG);
-                searchCourse(content);
+//                searchView.setQuery(content,false);
             }
         }
     }
@@ -141,22 +140,10 @@ public class AddCourseFragment extends Fragment implements SearchListAdapter.OnL
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_add_course, container, false);
         unbinder = ButterKnife.bind(this, view);
-//        fakeData();
         initView();
         return view;
     }
 
-    private void fakeData() {
-        String fake_data = "{\n" +
-                "      \"course_id\":1241,\n" +
-                "      \"course_name\":\"XXX课程\",\n" +
-                "      \"teacher\":\"xxx\",\n" +
-                "      \"time\":12414134\n" +
-                "    }";
-        for (int i = 0; i < 10; i++)
-            data.add((new Gson().fromJson(fake_data, SearchListBean.class)));
-        LogUtil.d("fake data size", String.valueOf(data.size()));
-    }
 
     @SuppressLint("RestrictedApi")
     private void initView() {
@@ -196,12 +183,12 @@ public class AddCourseFragment extends Fragment implements SearchListAdapter.OnL
         data.clear();
         sendMsg2Server(params);
     }
-
     private void sendMsg2Server(Map<String, String> params) {
         HttpUtil.searchCourse(params, new BaseObserver<SearchListBean>() {
             @Override
             protected void onSuccess(SearchListBean searchListBean) {
                 if (searchListBean.getResult_code().equals("200")) {
+//                    ToastUtil.showMessage(getActivity(),searchListBean.getData().get(0).getTeacher(), ToastUtil.LENGTH_LONG);
                     data.addAll(searchListBean.getData());
                     mHandler.sendEmptyMessage(WHAT_GET_DATA_SUCCESS);
                 } else {
@@ -294,6 +281,7 @@ public class AddCourseFragment extends Fragment implements SearchListAdapter.OnL
                 case WHAT_GET_DATA_SUCCESS:
                     if (refreshView.isRefreshing())
                         refreshView.setRefreshing(false);
+//                    ToastUtil.showMessage(getActivity(),data.get(0).getCourse_name(), ToastUtil.LENGTH_LONG);
                     mAdapter.notifyDataSetChanged();
                     break;
                 case WHAT_GET_DATA_FAILED:

@@ -6,16 +6,17 @@ import android.graphics.BitmapFactory;
 import android.os.Environment;
 import android.support.annotation.NonNull;
 
-import com.example.ten_daoyun.HttpBean.CheckListBean;
-import com.example.ten_daoyun.HttpBean.CourseInfoBean;
-import com.example.ten_daoyun.HttpBean.CoursesListBean;
-import com.example.ten_daoyun.HttpBean.DefaultResultBean;
-import com.example.ten_daoyun.HttpBean.DictInfoListBean;
-import com.example.ten_daoyun.HttpBean.LoginBean;
-import com.example.ten_daoyun.HttpBean.RegisterBean;
-import com.example.ten_daoyun.HttpBean.SearchListBean;
-import com.example.ten_daoyun.HttpBean.StudentsListBean;
-import com.example.ten_daoyun.HttpBean.UploadAvatarBean;
+import com.example.ten_daoyun.httpBean.CheckListBean;
+import com.example.ten_daoyun.httpBean.CourseInfoBean;
+import com.example.ten_daoyun.httpBean.CoursesListBean;
+import com.example.ten_daoyun.httpBean.DefaultResultBean;
+import com.example.ten_daoyun.httpBean.DictInfoListBean;
+import com.example.ten_daoyun.httpBean.LoginBean;
+import com.example.ten_daoyun.httpBean.RegisterBean;
+import com.example.ten_daoyun.httpBean.SearchListBean;
+import com.example.ten_daoyun.httpBean.StudentsListBean;
+import com.example.ten_daoyun.httpBean.SystemBean;
+import com.example.ten_daoyun.httpBean.UploadAvatarBean;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -105,61 +106,6 @@ public class HttpUtil extends HttpBase {
                 .subscribe(callback);
     }
 
-    /**
-     * 上传人脸信息
-     *
-     * @param params
-     * @param fileUrl  图片url
-     * @param callback
-     */
-    public static void uploadFaceInfo(Map<String, String> params, String fileUrl, BaseObserver<DefaultResultBean<Object>> callback) {
-        Retrofit retrofit = init();
-        RetrofitInterface service = retrofit.create(RetrofitInterface.class);
-
-        File file = new File(fileUrl);
-        RequestBody requestFile = RequestBody.create(MediaType.parse("image/jpg"), file);
-        MultipartBody.Part body = MultipartBody.Part.createFormData("face", file.getName(), requestFile);
-
-        service.httpUploadFaceInterface(params, body)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(callback);
-    }
-
-    public static void uploadFaceInfo(Map<String, String> params, File faceFile, BaseObserver<DefaultResultBean<Object>> callback) {
-        Retrofit retrofit = init();
-        RetrofitInterface service = retrofit.create(RetrofitInterface.class);
-        File file = new File(Environment.getExternalStorageDirectory() + "/upload_face_info.jpg");
-        BufferedOutputStream baos = null;
-        try {
-            baos = new BufferedOutputStream(new FileOutputStream(file));
-            Bitmap bit = BitmapFactory.decodeFile(faceFile.getPath());
-            bit.compress(Bitmap.CompressFormat.JPEG, 50, baos);
-            baos.flush();
-            baos.close();
-
-            RequestBody requestFile = RequestBody.create(MediaType.parse("image/jpg"), file);
-            MultipartBody.Part body = MultipartBody.Part.createFormData("face", file.getName(), requestFile);
-
-            service.httpUploadFaceInterface(params, body)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(callback);
-        } catch (Exception e) {
-            e.printStackTrace();
-            callback.onFailure(e, false);
-        }
-    }
-
-    public static void getFaceExist(String token, BaseObserver<DefaultResultBean<Object>> callback) {
-        Retrofit retrofit = init();
-        RetrofitInterface service = retrofit.create(RetrofitInterface.class);
-        service.httpGetFaceExistInterface(token)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(callback);
-    }
-
     public static void sendEmail(String email, BaseObserver<DefaultResultBean<Object>> callback) {
         Retrofit retrofit = init();
         RetrofitInterface service = retrofit.create(RetrofitInterface.class);
@@ -170,7 +116,20 @@ public class HttpUtil extends HttpBase {
     }
 
     /**
-     * 上传头像
+     * 获取系统参数
+     * @param params
+     * @param callback
+     */
+    public static void getSystemInfo(Map<String, String> params, BaseObserver<SystemBean> callback) {
+        Retrofit retrofit = init();
+        RetrofitInterface service = retrofit.create(RetrofitInterface.class);
+        service.httpGetSystemInfo(params)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(callback);
+    }
+    /**
+     * 上传头像，这个后台还有问题，先不做了
      *
      * @param params
      * @param fileUrl  图片url
@@ -207,15 +166,6 @@ public class HttpUtil extends HttpBase {
         Retrofit retrofit = init();
         RetrofitInterface service = retrofit.create(RetrofitInterface.class);
         service.httpGetStudentsListInterface(token, course_id)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(callback);
-    }
-
-    public static void getCheckList(String token, String course_id, BaseObserver<CheckListBean> callback) {
-        Retrofit retrofit = init();
-        RetrofitInterface service = retrofit.create(RetrofitInterface.class);
-        service.httpGetCheckListInterface(token, course_id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(callback);

@@ -160,7 +160,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@drawable/selector_bg_edit_2"
-                            android:hint="姓名"
+                            android:hint="*姓名"
                             android:inputType="textPersonName"
                             android:paddingBottom="2dp"
                             android:textCursorDrawable="@drawable/bg_input_cursor_2"

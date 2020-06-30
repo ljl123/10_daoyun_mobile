@@ -16,13 +16,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.ten_daoyun.HttpBean.CourseInfoBean;
-import com.example.ten_daoyun.HttpBean.DefaultResultBean;
-import com.example.ten_daoyun.HttpBean.StudentsListBean;
+import com.example.ten_daoyun.httpBean.CourseInfoBean;
+import com.example.ten_daoyun.httpBean.DefaultResultBean;
+import com.example.ten_daoyun.httpBean.StudentsListBean;
 import com.example.ten_daoyun.R;
 import com.example.ten_daoyun.adapters.StudentListAdapter;
 import com.example.ten_daoyun.http.BaseObserver;
 import com.example.ten_daoyun.http.HttpUtil;
+import com.example.ten_daoyun.httpBean.SystemBean;
 import com.example.ten_daoyun.session.SessionKeeper;
 import com.example.ten_daoyun.utils.GPSUtils;
 import com.example.ten_daoyun.utils.LogUtil;
@@ -37,6 +38,8 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+import static com.example.ten_daoyun.utils.Util.md5;
 
 public class CourseInfoActivity extends AppCompatActivity {
     private static final int WHAT_REQUEST_FAILED = 1;
@@ -76,9 +79,9 @@ public class CourseInfoActivity extends AppCompatActivity {
     String userType;
 
     List<StudentsListBean> students = new ArrayList<>();
-    StudentListAdapter mAdapter = new StudentListAdapter(students, this);
-    //默认1分钟
-    long duration_time = 1000 * 60;
+    String experience="2";
+    StudentListAdapter mAdapter = new StudentListAdapter(experience,students, this);
+    long duration_time = 365*24*60 * 1000 * 60;
 
     ProgressDialog progressDialog;
 
@@ -95,10 +98,52 @@ public class CourseInfoActivity extends AppCompatActivity {
         courseId = getIntent().getStringExtra("course_id");
         initView();
         initData();
-//        checkFaceInfo();
     }
 
     private void initData() {
+        Map<String, String> params = new HashMap<>();
+        params.put("token", SessionKeeper.getToken(this));
+        params.put("infoid", "1");
+        HttpUtil.getSystemInfo(params,new BaseObserver<SystemBean>(){
+            @Override
+            protected void onSuccess(SystemBean systemBean) {
+                if(systemBean.getResult_code().equals("200")){
+                    experience=systemBean.getData().get(0).getExperience();
+                    HttpUtil.getStudentsList(SessionKeeper.getToken(CourseInfoActivity.this), courseId, new BaseObserver<StudentsListBean>() {
+                        @Override
+                        protected void onSuccess(StudentsListBean studentsListBean) {
+                            if (studentsListBean.getResult_code().equals("200")) {
+                                students.clear();
+                                students.addAll(studentsListBean.getData());
+                                mHandler.sendEmptyMessage(WHAT_GET_STUDENTS_SUCCESS);
+                            } else {
+                                mHandler.sendEmptyMessage(WHAT_REQUEST_FAILED);
+                            }
+
+                        }
+                        @Override
+                        protected void onFailure(Throwable e, boolean isNetWorkError) {
+                            if (isNetWorkError) {
+                                mHandler.sendEmptyMessage(WHAT_NETWORK_ERROR);
+                            } else {
+                                LogUtil.e("get student list info", e.getMessage());
+                                mHandler.sendEmptyMessage(WHAT_REQUEST_FAILED);
+                            }
+                        }
+                    });
+                } else {
+                    mHandler.sendEmptyMessage(WHAT_REQUEST_FAILED);
+                }
+            }
+            @Override
+            protected void onFailure(Throwable e, boolean isNetWorkError) {
+                if (isNetWorkError) {
+                    mHandler.sendEmptyMessage(WHAT_NETWORK_ERROR);
+                } else {
+                    mHandler.sendEmptyMessage(WHAT_REQUEST_FAILED);
+                }
+            }
+        });
         HttpUtil.getCourseInfo(SessionKeeper.getToken(this), courseId, new BaseObserver<CourseInfoBean>() {
             @Override
             protected void onSuccess(CourseInfoBean courseInfoBean) {
@@ -152,29 +197,7 @@ public class CourseInfoActivity extends AppCompatActivity {
                 }
             }
         });
-        HttpUtil.getStudentsList(SessionKeeper.getToken(this), courseId, new BaseObserver<StudentsListBean>() {
-            @Override
-            protected void onSuccess(StudentsListBean studentsListBean) {
-                if (studentsListBean.getResult_code().equals("200")) {
-                    students.clear();
-                    students.addAll(studentsListBean.getData());
-                    mHandler.sendEmptyMessage(WHAT_GET_STUDENTS_SUCCESS);
-                } else {
-                    mHandler.sendEmptyMessage(WHAT_REQUEST_FAILED);
-                }
 
-            }
-
-            @Override
-            protected void onFailure(Throwable e, boolean isNetWorkError) {
-                if (isNetWorkError) {
-                    mHandler.sendEmptyMessage(WHAT_NETWORK_ERROR);
-                } else {
-                    LogUtil.e("get student list info", e.getMessage());
-                    mHandler.sendEmptyMessage(WHAT_REQUEST_FAILED);
-                }
-            }
-        });
     }
 
     private void setButtonState() {
@@ -225,7 +248,6 @@ public class CourseInfoActivity extends AppCompatActivity {
         if (userType.equals("3")) {
             sign();
         } else {
-            duration_time = 365*24*60 * 1000 * 60;
             startCheck();
         }
     }

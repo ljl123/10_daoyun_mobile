@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.example.ten_daoyun.HttpBean.CoursesListBean;
+import com.example.ten_daoyun.httpBean.CoursesListBean;
 import com.example.ten_daoyun.R;
 
 import java.util.List;

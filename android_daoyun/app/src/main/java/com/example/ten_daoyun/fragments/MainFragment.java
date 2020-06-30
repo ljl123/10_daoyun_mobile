@@ -16,7 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.ten_daoyun.HttpBean.CoursesListBean;
+import com.example.ten_daoyun.httpBean.CoursesListBean;
 import com.example.ten_daoyun.R;
 import com.example.ten_daoyun.activities.CourseInfoActivity;
 import com.example.ten_daoyun.activities.LoginActivity;

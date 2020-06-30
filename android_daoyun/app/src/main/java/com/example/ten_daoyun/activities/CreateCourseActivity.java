@@ -9,11 +9,12 @@ import android.support.v7.widget.Toolbar;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.example.ten_daoyun.HttpBean.DefaultResultBean;
+import com.example.ten_daoyun.httpBean.DefaultResultBean;
 import com.example.ten_daoyun.R;
 import com.example.ten_daoyun.http.BaseObserver;
 import com.example.ten_daoyun.http.HttpUtil;
 import com.example.ten_daoyun.session.SessionKeeper;
+import com.example.ten_daoyun.utils.GPSUtils;
 import com.example.ten_daoyun.utils.ToastUtil;
 
 import java.util.HashMap;
@@ -65,7 +66,7 @@ public class CreateCourseActivity extends AppCompatActivity {
         params.put("course_name", courseName.getText().toString());
         params.put("place", locationText.getText().toString());
         //todo location
-        params.put("location","");
+        params.put("location", GPSUtils.getInstance(this).getLocationString());
         params.put("time", courseTime.getText().toString());
         params.put("stu_count", courseCount.getText().toString());
         params.put("teacher", courseTeacher.getText().toString());

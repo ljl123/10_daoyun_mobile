@@ -1,15 +1,16 @@
 package com.example.ten_daoyun.http;
 
-import com.example.ten_daoyun.HttpBean.CheckListBean;
-import com.example.ten_daoyun.HttpBean.CourseInfoBean;
-import com.example.ten_daoyun.HttpBean.CoursesListBean;
-import com.example.ten_daoyun.HttpBean.DefaultResultBean;
-import com.example.ten_daoyun.HttpBean.DictInfoListBean;
-import com.example.ten_daoyun.HttpBean.LoginBean;
-import com.example.ten_daoyun.HttpBean.RegisterBean;
-import com.example.ten_daoyun.HttpBean.SearchListBean;
-import com.example.ten_daoyun.HttpBean.StudentsListBean;
-import com.example.ten_daoyun.HttpBean.UploadAvatarBean;
+import com.example.ten_daoyun.httpBean.CheckListBean;
+import com.example.ten_daoyun.httpBean.CourseInfoBean;
+import com.example.ten_daoyun.httpBean.CoursesListBean;
+import com.example.ten_daoyun.httpBean.DefaultResultBean;
+import com.example.ten_daoyun.httpBean.DictInfoListBean;
+import com.example.ten_daoyun.httpBean.LoginBean;
+import com.example.ten_daoyun.httpBean.RegisterBean;
+import com.example.ten_daoyun.httpBean.SearchListBean;
+import com.example.ten_daoyun.httpBean.StudentsListBean;
+import com.example.ten_daoyun.httpBean.SystemBean;
+import com.example.ten_daoyun.httpBean.UploadAvatarBean;
 
 import java.util.Map;
 
@@ -67,27 +68,15 @@ public interface RetrofitInterface {
     @Multipart
     @PUT("user/info")
     Observable<DefaultResultBean<Object>> httpModifyUserInfoInterface(@PartMap Map<String, String> params);
-
     /**
-     * 上传人脸信息接口
+     * 查看系统信息
      *
      * @param params
-     * @param file
      * @return
      */
     @Multipart
-    @POST("user/face")
-    Observable<DefaultResultBean<Object>> httpUploadFaceInterface(@PartMap Map<String, String> params, @Part MultipartBody.Part file);
-
-    /**
-     * 查询人脸是否存在
-     *
-     * @param param
-     * @return
-     */
-    @GET("user/face")
-    Observable<DefaultResultBean<Object>> httpGetFaceExistInterface(@Query("token") String param);
-
+    @POST("system/infos")
+    Observable<SystemBean> httpGetSystemInfo(@PartMap Map<String, String> params);
     /**
      * 发送邮箱验证码
      *
@@ -129,15 +118,6 @@ public interface RetrofitInterface {
     @GET("course/students")
     Observable<StudentsListBean> httpGetStudentsListInterface(@Query("token") String token, @Query("course_id") String course_id);
 
-    /**
-     * 获取签到列表
-     *
-     * @param token
-     * @param course_id
-     * @return
-     */
-    @GET("course/checklist")
-    Observable<CheckListBean> httpGetCheckListInterface(@Query("token") String token, @Query("course_id") String course_id);
 
     /**
      * 搜索课程

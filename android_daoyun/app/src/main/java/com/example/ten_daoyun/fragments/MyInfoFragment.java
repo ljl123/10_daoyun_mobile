@@ -24,8 +24,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.example.ten_daoyun.HttpBean.DefaultResultBean;
-import com.example.ten_daoyun.HttpBean.UploadAvatarBean;
+import com.example.ten_daoyun.httpBean.DefaultResultBean;
+import com.example.ten_daoyun.httpBean.UploadAvatarBean;
 import com.example.ten_daoyun.R;
 import com.example.ten_daoyun.activities.LoginActivity;
 import com.example.ten_daoyun.activities.UserInfoActivity;
@@ -56,14 +56,12 @@ public class MyInfoFragment extends Fragment {
     //选择头像 标记
     private static final int REQUEST_PICK_MEDIA = 101;
     private static final int REQUEST_TAKE_MEDIA = 102;
-    private static final int REQUEST_PICK_FACE = 105;
     private static final int REQUEST_CROP_MEDIA = 103;
     private static final int WHAT_CHANGE_AVATAR = 104;
     Uri imageUri = Uri.parse("file://" + Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES) + "/avatar.jpg");
     File take_photo_file = new File(Environment.getExternalStorageDirectory() + File.separator + "Pictures", "avatar.jpg");
     File take_face_file = new File(Environment.getExternalStorageDirectory() + File.separator + "Pictures", "face.jpg");
     Uri take_photo_file_Uri;
-    Uri take_face_file_Uri;
     @BindView(R.id.avatar)
     ImageView avatar;
     @BindView(R.id.nick_name)
@@ -93,12 +91,8 @@ public class MyInfoFragment extends Fragment {
         initDialog();
         take_photo_file_Uri = FileProvider.getUriForFile(
                 getActivity(),
-                "com.example.daoyun.fileprovider",
+                "com.example.ten_daoyun.fileprovider",
                 take_photo_file);
-        take_face_file_Uri = FileProvider.getUriForFile(
-                getActivity(),
-                "com.example.daoyun.fileprovider",
-                take_face_file);
         return view;
     }
 
@@ -133,7 +127,8 @@ public class MyInfoFragment extends Fragment {
 
     @OnClick(R.id.avatar)
     public void onAvatarClicked() {
-        chooseDialog.show();
+        ToastUtil.showMessage(getActivity(), "暂不支持修改头像");
+        //chooseDialog.show();
     }
 
     @OnClick(R.id.edit_user_info)
@@ -174,17 +169,6 @@ public class MyInfoFragment extends Fragment {
                 .setOnItemClickListener((dialog, item, view, position) -> {
                     Intent intent;
                     switch (position) {
-//                        case 0:
-//                            //启动相机
-//                            refreshImageUri();
-//                            intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//                            intent.putExtra(MediaStore.EXTRA_OUTPUT,
-//                                    FileProvider.getUriForFile(
-//                                            getActivity(),
-//                                            "com.example.checkinsystem.fileprovider",
-//                                            take_photo_file));
-//                            startActivityForResult(intent, REQUEST_TAKE_MEDIA);
-//                            break;
                         case 0:
                             //启动相册
                             refreshImageUri(imageUri);
@@ -247,11 +231,6 @@ public class MyInfoFragment extends Fragment {
                     startActivityForResult(intent, REQUEST_CROP_MEDIA);
                 }
                 break;
-            case REQUEST_PICK_FACE:
-                if (resultCode == getActivity().RESULT_OK) {
-                    uploadFace();
-                }
-                break;
             case REQUEST_CROP_MEDIA:
                 LogUtil.d("result", String.valueOf(REQUEST_CROP_MEDIA));
                 if (resultCode == getActivity().RESULT_OK) {
@@ -263,29 +242,6 @@ public class MyInfoFragment extends Fragment {
                 return;
         }
         super.onActivityResult(requestCode, resultCode, data);
-    }
-
-    private void uploadFace() {
-        Map<String, String> params = new HashMap<>();
-        params.put("token", SessionKeeper.getToken(getActivity()));
-        params.put("uid", SessionKeeper.getUserId(getActivity()));
-        HttpUtil.uploadFaceInfo(params, take_face_file, new BaseObserver<DefaultResultBean<Object>>() {
-            @Override
-            protected void onSuccess(DefaultResultBean<Object> objectDefaultResultBean) {
-                if (objectDefaultResultBean.getResult_code().equals("200"))
-                    ToastUtil.showMessage(getActivity(), "修改人脸信息成功");
-                else ToastUtil.showMessage(getActivity(), objectDefaultResultBean.getResult_desc());
-            }
-
-            @Override
-            protected void onFailure(Throwable e, boolean isNetWorkError) {
-                if (isNetWorkError)
-                    ToastUtil.showMessage(getActivity(), "网络错误", ToastUtil.LENGTH_LONG);
-                else
-                    ToastUtil.showMessage(getActivity(), e.getMessage(), ToastUtil.LENGTH_SHORT);
-
-            }
-        });
     }
 
     private void uploadAvatar() {

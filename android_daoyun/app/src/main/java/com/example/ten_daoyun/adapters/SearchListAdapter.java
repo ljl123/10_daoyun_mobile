@@ -10,7 +10,7 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.example.ten_daoyun.HttpBean.SearchListBean;
+import com.example.ten_daoyun.httpBean.SearchListBean;
 import com.example.ten_daoyun.R;
 
 import java.util.List;
@@ -31,7 +31,11 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Vi
         this.mOnListListener = mOnListListener;
         this.userType = userType;
     }
-
+    public void setDatas(List<SearchListBean> data){
+        this.data.clear();
+        this.data.addAll(data);
+        notifyDataSetChanged();
+    }
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {

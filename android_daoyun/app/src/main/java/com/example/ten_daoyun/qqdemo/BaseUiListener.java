@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.example.ten_daoyun.HttpBean.LoginBean;
+import com.example.ten_daoyun.httpBean.LoginBean;
 import com.example.ten_daoyun.activities.MainActivity;
 import com.example.ten_daoyun.session.SessionKeeper;
 import com.tencent.connect.UserInfo;

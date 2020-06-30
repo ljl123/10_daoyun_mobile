@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.ten_daoyun.HttpBean.StudentsListBean;
+import com.example.ten_daoyun.httpBean.StudentsListBean;
 import com.example.ten_daoyun.R;
 
 import java.util.List;
@@ -19,9 +19,11 @@ import butterknife.ButterKnife;
 
 public class StudentListAdapter extends RecyclerView.Adapter<StudentListAdapter.ViewHolder> {
     private List<StudentsListBean> data;
+    private String experience;
     private Context context;
 
-    public StudentListAdapter(List<StudentsListBean> data, Context context) {
+    public StudentListAdapter(String experience,List<StudentsListBean> data, Context context) {
+        this.experience=experience;
         this.data = data;
         this.context = context;
     }
@@ -37,7 +39,7 @@ public class StudentListAdapter extends RecyclerView.Adapter<StudentListAdapter.
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         viewHolder.studentName.setText(data.get(i).getName());
-        viewHolder.studentCheck.setText("经验值: "+Integer.parseInt(data.get(i).getCheck_count())*2);
+        viewHolder.studentCheck.setText("经验值: "+Integer.parseInt(data.get(i).getCheck_count())*Integer.parseInt(experience));
     }
 
     @Override

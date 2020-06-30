@@ -1,4 +1,4 @@
-package com.example.ten_daoyun.HttpBean;
+package com.example.ten_daoyun.httpBean;
 
 public class LoginBean extends DefaultResultBean<LoginBean> {
 
