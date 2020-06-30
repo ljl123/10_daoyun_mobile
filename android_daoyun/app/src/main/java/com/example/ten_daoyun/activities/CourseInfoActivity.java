@@ -52,6 +52,8 @@ public class CourseInfoActivity extends AppCompatActivity {
     private static final int WHAT_GET_CAN_CHECK_SUCCESS = 8;
     private static final int WHAT_GET_CAN_CHECK_FAILED = 9;
     private static final int REQUEST_TAKE_MEDIA = 102;
+    private static final int WHAT_STOP_CHECK_SUCCESS=10;
+    private static final int WHAT_STOP_CHECK_FAILED=11;
 
 
     @BindView(R.id.toolbar)
@@ -70,6 +72,8 @@ public class CourseInfoActivity extends AppCompatActivity {
     TextView textUseWeb;
     @BindView(R.id.check)
     Button check;
+    @BindView(R.id.stop_check)
+    Button stop_check;
     @BindView(R.id.recycle_view)
     RecyclerView recycleView;
     @BindView(R.id.place)
@@ -79,7 +83,7 @@ public class CourseInfoActivity extends AppCompatActivity {
     String userType;
 
     List<StudentsListBean> students = new ArrayList<>();
-    String experience="2";
+    String experience="2";//默认先给2，然后再去读取服务器的系统参数
     StudentListAdapter mAdapter = new StudentListAdapter(experience,students, this);
     long duration_time = 365*24*60 * 1000 * 60;
 
@@ -109,6 +113,7 @@ public class CourseInfoActivity extends AppCompatActivity {
             protected void onSuccess(SystemBean systemBean) {
                 if(systemBean.getResult_code().equals("200")){
                     experience=systemBean.getData().get(0).getExperience();
+                    mAdapter.setExperience(experience);
                     HttpUtil.getStudentsList(SessionKeeper.getToken(CourseInfoActivity.this), courseId, new BaseObserver<StudentsListBean>() {
                         @Override
                         protected void onSuccess(StudentsListBean studentsListBean) {
@@ -156,6 +161,7 @@ public class CourseInfoActivity extends AppCompatActivity {
                     if (userType.equals("3")) {
                         signCount.setVisibility(View.GONE);
                         textUseWeb.setVisibility(View.GONE);
+                        stop_check.setVisibility(View.GONE);
                     } else if (userType.equals("2")) {
                         signCount.setVisibility(View.VISIBLE);
                         signCount.setText("点名次数: " + String.valueOf(courseInfoBean.getData().getCheck_count()));
@@ -168,10 +174,12 @@ public class CourseInfoActivity extends AppCompatActivity {
                                 check.setText("发起签到");
                                 check.setClickable(true);
                                 check.setVisibility(View.VISIBLE);
+                                stop_check.setVisibility(View.GONE);
                             } else {
                                 check.setText("签到中");
                                 check.setClickable(false);
                                 check.setVisibility(View.VISIBLE);
+                                stop_check.setVisibility(View.VISIBLE);
                             }
                         }
 
@@ -181,6 +189,7 @@ public class CourseInfoActivity extends AppCompatActivity {
                     ToastUtil.showMessage(getActivityContext(), courseInfoBean.getResult_desc());
                     check.setClickable(false);
                     check.setVisibility(View.GONE);
+                    stop_check.setVisibility(View.GONE);
                 }
 
             }
@@ -189,6 +198,7 @@ public class CourseInfoActivity extends AppCompatActivity {
             protected void onFailure(Throwable e, boolean isNetWorkError) {
                 check.setClickable(false);
                 check.setVisibility(View.GONE);
+                stop_check.setVisibility(View.GONE);
                 if (isNetWorkError) {
                     mHandler.sendEmptyMessage(WHAT_NETWORK_ERROR);
                 } else {
@@ -252,6 +262,39 @@ public class CourseInfoActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * 停止签到
+     */
+    @OnClick(R.id.stop_check)
+    public void onStopCheckClicked() {
+        if (userType.equals("2")) {
+            Calendar calendar = Calendar.getInstance();
+            Map<String, String> params = new HashMap<>();
+            params.put("token", SessionKeeper.getToken(getActivityContext()));
+            params.put("course_id", courseId);
+            params.put("end_time", String.valueOf(calendar.getTimeInMillis()));
+            HttpUtil.stopCheck(params, new BaseObserver<DefaultResultBean<Object>>(){
+
+                @Override
+                protected void onSuccess(DefaultResultBean<Object> objectDefaultResultBean) {
+                    if (objectDefaultResultBean.getResult_code().equals("200"))
+                        mHandler.sendEmptyMessage(WHAT_STOP_CHECK_SUCCESS);
+                    else
+                        mHandler.sendEmptyMessage(WHAT_STOP_CHECK_FAILED);
+                }
+
+                @Override
+                protected void onFailure(Throwable e, boolean isNetWorkError) {
+                    if (isNetWorkError) {
+                        mHandler.sendEmptyMessage(WHAT_NETWORK_ERROR);
+                    } else {
+                        LogUtil.e("start check", e.getMessage());
+                        mHandler.sendEmptyMessage(WHAT_START_CHECK_FAILED);
+                    }
+                }
+            });
+        }
+    }
     /**
      * 发起签到
      */
@@ -368,30 +411,35 @@ public class CourseInfoActivity extends AppCompatActivity {
                 case WHAT_START_CHECK_FAILED:
                     ToastUtil.showMessage(getActivityContext(), "开始签到失败,请重试");
                     break;
+                case WHAT_STOP_CHECK_SUCCESS:
+                    ToastUtil.showMessage(getActivityContext(), "停止签到成功");
+                    setButtonState();
+                    break;
+                case WHAT_STOP_CHECK_FAILED:
+                    ToastUtil.showMessage(getActivityContext(), "停止签到失败,请重试");
+                    break;
                 case WHAT_GET_CAN_CHECK_SUCCESS:
                     int canCheck = msg.arg1;
                     if (userType.equals("3")) {
                         if (canCheck == 0) {
                             check.setText("无签到");
                             check.setClickable(false);
-                            //check.setBackgroundColor(getResources().getColor(R.color.colorAccent));
                         }
                     } else {
                         if (canCheck == 1) {
                             check.setText("签到中");
                             check.setClickable(false);
-                            //check.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                            stop_check.setVisibility(View.VISIBLE);
                         } else {
                             check.setText("发起签到");
                             check.setClickable(true);
-                           // check.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                            stop_check.setVisibility(View.GONE);
                         }
                     }
                     break;
                 case WHAT_GET_CAN_CHECK_FAILED:
                     check.setText("无法操作");
                     check.setClickable(false);
-                  //  check.setBackgroundColor(getResources().getColor(R.color.colorAccent));
                     break;
             }
         }

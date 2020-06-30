@@ -27,7 +27,9 @@ public class StudentListAdapter extends RecyclerView.Adapter<StudentListAdapter.
         this.data = data;
         this.context = context;
     }
-
+    public void setExperience(String experience){
+        this.experience=experience;
+    }
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
